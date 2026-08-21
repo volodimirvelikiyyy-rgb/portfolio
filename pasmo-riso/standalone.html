@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><text%20y='.9em'%20font-size='90'>🎨</text></svg>">
+<title>ПАСМО Різо</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --paper:#EFEFEB;
+  --paper-2:#E4E4DD;
+  --ink:#141416;
+  --muted:#5B5B62;
+  --blue:#2B3AC4;
+  --pink:#E4407E;
+  --on-blue:#F3F3EE;
+  --on-pink:#141416;
+  --rule:#141416;
+  --rule-soft:rgba(20,20,22,.22);
+  --blend:multiply;
+  --grain:.28;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131316;
+    --paper-2:#1C1C21;
+    --ink:#ECECE6;
+    --muted:#9997A1;
+    --blue:#7F8CF7;
+    --pink:#FF6FA5;
+    --on-blue:#101015;
+    --on-pink:#161016;
+    --rule:#ECECE6;
+    --rule-soft:rgba(236,236,230,.26);
+    --blend:normal;
+    --grain:.16;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131316;
+  --paper-2:#1C1C21;
+  --ink:#ECECE6;
+  --muted:#9997A1;
+  --blue:#7F8CF7;
+  --pink:#FF6FA5;
+  --on-blue:#101015;
+  --on-pink:#161016;
+  --rule:#ECECE6;
+  --rule-soft:rgba(236,236,230,.26);
+  --blend:normal;
+  --grain:.16;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Golos Text","Segoe UI",Arial,sans-serif;
+  font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+  opacity:var(--grain);mix-blend-mode:var(--blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+h1,h2,h3{
+  font-family:"Oswald","Golos Text",Arial,sans-serif;
+  font-weight:700;line-height:.94;text-transform:uppercase;
+  letter-spacing:.005em;text-wrap:balance;margin:0;
+}
+p{margin:0}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.tag{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky;top:0;z-index:60;background:var(--paper);
+  border-bottom:2px solid var(--rule);
+}
+.bar-in{display:flex;align-items:center;gap:18px;height:56px}
+.logo{font-family:"Oswald",sans-serif;font-weight:700;font-size:22px;letter-spacing:.12em;text-transform:uppercase}
+.logo b{color:var(--pink);font-weight:700}
+.bar nav{margin-left:auto;display:flex;gap:18px}
+.bar nav a{text-decoration:none;font-size:13px;font-weight:500;padding:4px 0;box-shadow:inset 0 -2px 0 transparent;transition:box-shadow .15s}
+.bar nav a:hover{box-shadow:inset 0 -2px 0 var(--pink)}
+@media (max-width:860px){.bar nav{display:none}}
+.bar .call{font-family:"IBM Plex Mono",monospace;font-size:13px;margin-left:auto}
+@media (min-width:861px){.bar .call{margin-left:0}}
+@media (max-width:520px){.bar .call{display:none}}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 24px;border:2px solid var(--rule);border-radius:0;
+  background:var(--pink);color:var(--on-pink);
+  font-family:"Oswald",sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  box-shadow:5px 5px 0 var(--rule);
+  transition:transform .12s, box-shadow .12s;
+}
+.btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--rule)}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--rule)}
+.btn-blue{background:var(--blue);color:var(--on-blue)}
+.btn-plain{background:transparent;color:var(--ink)}
+.btn-sm{padding:8px 14px;font-size:13px;box-shadow:3px 3px 0 var(--rule)}
+.btn-sm:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--rule)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(26px,4vw,52px);padding-bottom:clamp(24px,4vw,44px)}
+.hero .tag{color:var(--muted)}
+.stack{margin-top:14px;display:grid;gap:0}
+.stack h1{
+  font-size:clamp(46px,13.5vw,178px);line-height:.82;letter-spacing:-.01em;
+  mix-blend-mode:var(--blend);
+}
+.stack h1:nth-child(1){color:var(--ink)}
+.stack h1:nth-child(2){color:var(--blue);margin-left:clamp(0px,4vw,64px);margin-top:-.045em}
+.stack h1:nth-child(3){color:var(--pink);margin-left:clamp(0px,8vw,128px);margin-top:-.045em}
+.hero-bottom{
+  margin-top:clamp(22px,3vw,40px);display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(18px,3vw,44px);align-items:end;
+  border-top:2px solid var(--rule);padding-top:20px;
+}
+@media (max-width:860px){.hero-bottom{grid-template-columns:1fr}}
+.hero-lead{font-size:clamp(16px,1.6vw,19px);max-width:46ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:2px solid var(--rule)}
+.fact{padding:14px 16px;border-right:2px solid var(--rule)}
+.fact:last-child{border-right:none}
+.fact b{display:block;font-family:"Oswald",sans-serif;font-size:clamp(24px,3vw,34px);line-height:1}
+.fact span{font-size:12px;color:var(--muted)}
+
+/* ---------- sheets ---------- */
+.sheet{border-top:2px solid var(--rule);padding-block:clamp(38px,6vw,72px)}
+.sheet-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.stamp{
+  font-family:"Oswald",sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  border:2px solid var(--rule);padding:3px 10px;
+}
+.stamp-blue{background:var(--blue);color:var(--on-blue)}
+.stamp-pink{background:var(--pink);color:var(--on-pink)}
+.sheet h2{font-size:clamp(28px,4.6vw,58px);max-width:16ch}
+.sheet-lead{margin-top:14px;max-width:60ch;color:var(--muted)}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px);margin-top:clamp(22px,3vw,38px);align-items:start}
+@media (max-width:900px){.duo{grid-template-columns:1fr}}
+.duo ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.duo li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:15px;color:var(--muted)}
+.duo li em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--pink)}
+
+/* box = interactive card */
+.box{border:2px solid var(--rule);background:var(--paper-2);padding:18px}
+.box-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.box svg{display:block;width:100%;height:auto}
+.pills{display:flex;flex-wrap:wrap;gap:0;border:2px solid var(--rule);margin-bottom:14px}
+.pill{
+  flex:1 1 auto;padding:9px 10px;background:transparent;border:none;border-right:2px solid var(--rule);
+  font-family:"Oswald",sans-serif;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;transition:background .12s,color .12s;
+}
+.pill:last-child{border-right:none}
+.pill:hover{background:var(--rule-soft)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.spec{margin-top:14px;border-top:2px solid var(--rule);padding-top:12px;display:grid;gap:7px}
+.spec-row{display:grid;grid-template-columns:96px 1fr;gap:10px;font-size:14px;align-items:baseline}
+.spec-row b{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* colour bar */
+.tones{display:grid;grid-template-columns:repeat(10,1fr);border:2px solid var(--rule)}
+.tone{
+  aspect-ratio:1/2.4;border:none;border-right:2px solid var(--rule);cursor:pointer;position:relative;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;
+}
+.tone:last-child{border-right:none}
+.tone[aria-pressed="true"]::after{
+  content:"";position:absolute;inset:0;border:4px solid var(--pink);
+}
+.recipe{
+  margin-top:14px;border:2px solid var(--rule);background:var(--pink);color:var(--on-pink);
+  padding:12px 14px;font-family:"IBM Plex Mono",monospace;font-size:15px;
+}
+
+/* curl */
+.curl{display:grid;grid-template-columns:1fr 118px;gap:16px;align-items:center}
+@media (max-width:480px){.curl{grid-template-columns:1fr}}
+.mm{font-family:"Oswald",sans-serif;font-size:44px;line-height:.9}
+.mm small{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--pink);margin-top:8px}
+
+/* ---------- price ticket ---------- */
+.ticket{border:2px solid var(--rule);margin-top:clamp(22px,3vw,38px)}
+.ticket-cap{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--ink);color:var(--paper);padding:8px 14px;
+  font-family:"Oswald",sans-serif;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+}
+.tick{
+  display:grid;grid-template-columns:1fr auto;gap:6px 14px;
+  padding:12px 14px;border-bottom:2px dotted var(--rule-soft);
+}
+.tick:last-child{border-bottom:none}
+.tick .n{font-size:15.5px;font-weight:500}
+.tick .p{font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:500;white-space:nowrap;text-align:right}
+.tick .d{grid-column:1/2;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.ticket-foot{padding:14px;border-top:2px solid var(--rule);font-size:13.5px;color:var(--muted)}
+
+/* ---------- masters ---------- */
+.crew{border:2px solid var(--rule);margin-top:clamp(22px,3vw,38px)}
+.crew-row{
+  display:grid;grid-template-columns:64px 200px 1fr;gap:18px;align-items:center;
+  padding:16px;border-bottom:2px solid var(--rule);
+}
+.crew-row:last-child{border-bottom:none}
+@media (max-width:760px){.crew-row{grid-template-columns:52px 1fr;gap:12px}}
+.badge{
+  width:56px;height:56px;display:grid;place-items:center;border:2px solid var(--rule);
+  font-family:"Oswald",sans-serif;font-size:24px;
+}
+@media (max-width:760px){.badge{width:46px;height:46px;font-size:20px}}
+.crew-row h3{font-size:22px}
+.crew-row .role{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.crew-row p{font-size:14.5px;color:var(--muted)}
+.crew-row .sk{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.sk span{font-family:"IBM Plex Mono",monospace;font-size:11px;border:1px solid var(--rule-soft);padding:3px 8px}
+@media (max-width:760px){.crew-row .txt{grid-column:1/-1}}
+
+/* ---------- steps ---------- */
+.tape{display:grid;grid-template-columns:repeat(4,minmax(200px,1fr));border:2px solid var(--rule);margin-top:clamp(22px,3vw,38px);overflow-x:auto}
+@media (max-width:820px){.tape{grid-template-columns:repeat(4,minmax(220px,1fr))}}
+.tape-item{padding:18px 16px;border-right:2px solid var(--rule);display:flex;flex-direction:column;gap:8px;min-width:0}
+.tape-item:last-child{border-right:none}
+.tape-item .num{font-family:"Oswald",sans-serif;font-size:34px;line-height:1;color:var(--blue)}
+.tape-item h3{font-size:19px}
+.tape-item p{font-size:14px;color:var(--muted)}
+.tape-item .when{margin-top:auto;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--muted)}
+
+/* ---------- booking ---------- */
+.book{background:var(--blue);color:var(--on-blue);border:2px solid var(--rule);margin-top:clamp(22px,3vw,38px)}
+.book-in{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,3vw,40px);padding:clamp(20px,3vw,36px)}
+@media (max-width:860px){.book-in{grid-template-columns:1fr}}
+.book h2,.book h3{color:var(--on-blue)}
+.f{display:grid;gap:13px}
+.f label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.f input,.f select{
+  width:100%;padding:12px 13px;border:2px solid var(--on-blue);background:transparent;color:var(--on-blue);
+  font-size:15px;border-radius:0;
+}
+.f input::placeholder{color:var(--on-blue);opacity:.5}
+.f select option{color:#141416;background:#EFEFEB}
+.f .row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media (max-width:520px){.f .row{grid-template-columns:1fr}}
+.f .note{font-size:12.5px;opacity:.78}
+.f .btn{border-color:var(--on-blue);box-shadow:5px 5px 0 var(--on-blue);justify-self:start}
+.f .btn:hover{box-shadow:2px 2px 0 var(--on-blue)}
+.done2{border:2px solid var(--on-blue);padding:20px;display:grid;gap:12px}
+.done2 dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14.5px}
+.done2 dt{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.75;padding-top:3px}
+.done2 dd{margin:0}
+.done2 .note{font-size:12.5px;opacity:.78}
+.where{display:grid;gap:14px;align-content:start}
+.where > div{border-bottom:2px solid var(--on-blue);padding-bottom:12px}
+.where b{display:block;font-family:"Oswald",sans-serif;font-size:19px;letter-spacing:.04em;text-transform:uppercase}
+.where span{font-size:14px;opacity:.85}
+.where .h{font-family:"IBM Plex Mono",monospace;font-size:13.5px;display:flex;justify-content:space-between;max-width:250px}
+
+/* ---------- footer ---------- */
+.end{border-top:2px solid var(--rule);margin-top:clamp(34px,5vw,64px);padding-block:28px 40px}
+.end-in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end}
+.end small{display:block;max-width:48ch;color:var(--muted);font-size:12.5px;margin-top:8px}
+
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <div class="logo">ПАС<b>МО</b></div>
+    <nav>
+      <a href="#work">Техніки</a>
+      <a href="#price">Прайс</a>
+      <a href="#crew">Майстри</a>
+      <a href="#book">Запис</a>
+    </nav>
+    <span class="call mono">+380 (44) 000-00-00</span>
+    <a class="btn btn-sm" href="#book">Записатись</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="wrap hero">
+    <div class="tag">Студія волосся · Київ, Поділ · від 2014 року</div>
+    <div class="stack">
+      <h1>Стрижка</h1>
+      <h1>Колір</h1>
+      <h1>Завивка</h1>
+    </div>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-lead">Три речі, які ми робимо щодня і не робимо нічого іншого. Форму рахуємо кутом зрізу, колір — рівнем глибини тону, хвилю — діаметром коклюшки. Ціну називаємо до першого дотику ножицями.</p>
+        <div class="facts">
+          <div class="fact"><b class="mono">12</b><span>років студії</span></div>
+          <div class="fact"><b class="mono">3</b><span>майстри, три техніки</span></div>
+          <div class="fact"><b class="mono">20&nbsp;хв</b><span>діагностика безкоштовно</span></div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="#book">Записатись на діагностику</a>
+        <a class="btn btn-plain" href="#price">Прайс</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUT -->
+  <section class="sheet" id="work">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp">Аркуш 01</span>
+        <span class="tag" style="color:var(--muted)">Геометрія</span>
+      </div>
+      <h2>Форму задає кут, а не назва зачіски</h2>
+      <p class="sheet-lead">Нуль градусів — уся вага внизу й чиста лінія. Шістдесят — рух і повітря. Оберіть тип і подивіться, як міняється довжина пасом і сама лінія зрізу.</p>
+      <div class="duo">
+        <div>
+          <ul>
+            <li><em>01</em><span>Сухий контрольний зріз наприкінці: на вологому волоссі довжина бреше на 1–2 см</span></li>
+            <li><em>02</em><span>Напрямок росту й вихори дивимось до того, як почали різати</span></li>
+            <li><em>03</em><span>Показуємо укладку на 10 хвилин — інакше форма живе один день</span></li>
+            <li><em>04</em><span>Дитячі стрижки робимо без фена: гучний звук зриває весь візит</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="box-top">
+            <span class="tag">Схема зрізу</span>
+            <span class="tag" id="angle" style="color:var(--pink)"></span>
+          </div>
+          <div class="pills" id="pills"></div>
+          <svg id="cutSvg" viewBox="0 0 420 180" role="img" aria-label="Довжина пасом і лінія зрізу"></svg>
+          <div class="spec">
+            <div class="spec-row"><b>Форма</b><span id="sForm"></span></div>
+            <div class="spec-row"><b>Укладка</b><span id="sStyle"></span></div>
+            <div class="spec-row"><b>Оновлення</b><span id="sRenew"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOUR -->
+  <section class="sheet">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp stamp-blue">Аркуш 02</span>
+        <span class="tag" style="color:var(--muted)">Колористика</span>
+      </div>
+      <h2>Перше число формули — глибина тону</h2>
+      <p class="sheet-lead">Від 1 (чорний) до 10 (платина). Різниця між вашим рівнем і бажаним визначає все: чи потрібне освітлення, скільки годин ви проведете в кріслі й скільки це коштує.</p>
+      <div class="duo">
+        <div class="box">
+          <div class="box-top">
+            <span class="tag">Шкала 1–10</span>
+            <span class="tag" style="color:var(--blue)">Оберіть рівень</span>
+          </div>
+          <div class="tones" id="tones"></div>
+          <div class="recipe mono" id="recipe"></div>
+          <div class="spec">
+            <div class="spec-row"><b>Рівень</b><span id="tName"></span></div>
+            <div class="spec-row"><b>Що дає</b><span id="tWhat"></span></div>
+            <div class="spec-row"><b>У кріслі</b><span id="tTime"></span></div>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li><em>01</em><span>Тест на пористість і залишок старого пігменту — до того, як змішали барвник</span></li>
+            <li><em>02</em><span>Різниця більш ніж у 3 рівні за візит — це вже освітлення, а не фарбування</span></li>
+            <li><em>03</em><span>Рудий і мідний вимиваються першими: тонування раз на 5–6 тижнів</span></li>
+            <li><em>04</em><span>Хну й басму не перекриваємо навмання — спершу тест пасма</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERM -->
+  <section class="sheet">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp stamp-pink">Аркуш 03</span>
+        <span class="tag" style="color:var(--muted)">Завивка</span>
+      </div>
+      <h2>Розмір завитка — це діаметр коклюшки</h2>
+      <p class="sheet-lead">Дев’ять міліметрів дають пружну спіраль, тридцять два — ледь помітну хвилю. Склад підбираємо під стан волосся: після освітлення працюємо тільки м’якими біосистемами.</p>
+      <div class="duo">
+        <div>
+          <ul>
+            <li><em>01</em><span>Не робимо завивку раніше ніж за 2 тижні після фарбування</span></li>
+            <li><em>02</em><span>Прикоренева зона — окрема техніка: об’єм без завитка по довжині</span></li>
+            <li><em>03</em><span>Перші 48 годин — без миття й гумок, інакше форма «сяде»</span></li>
+            <li><em>04</em><span>Раз на місяць — реконструкція, бо завивка сушить довжину</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="box-top">
+            <span class="tag">Коклюшка</span>
+            <span class="tag" id="cType" style="color:var(--pink)"></span>
+          </div>
+          <div class="curl">
+            <svg id="curlSvg" viewBox="0 0 300 168" role="img" aria-label="Форма завитка залежно від діаметра коклюшки"></svg>
+            <div>
+              <div class="mm"><span id="cVal">18</span><small> мм</small></div>
+              <label class="tag" for="cRange" style="display:block;margin-top:6px;color:var(--muted)">Пересуньте</label>
+              <input id="cRange" type="range" min="9" max="32" step="1" value="18" aria-label="Діаметр коклюшки в міліметрах">
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-row"><b>Результат</b><span id="cRes"></span></div>
+            <div class="spec-row"><b>Тримається</b><span id="cHold"></span></div>
+            <div class="spec-row"><b>Кому</b><span id="cWho"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section class="sheet" id="price">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp">Прайс</span>
+        <span class="tag" style="color:var(--muted)">Ціна · тривалість</span>
+      </div>
+      <h2>Скільки коштує і скільки триває</h2>
+      <p class="sheet-lead">Час указано чесно, разом із витримкою барвника. Якщо робота виходить довшою — попереджаємо до початку, а не в процесі.</p>
+      <div id="ticket"></div>
+    </div>
+  </section>
+
+  <!-- CREW -->
+  <section class="sheet" id="crew">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp stamp-blue">Майстри</span>
+        <span class="tag" style="color:var(--muted)">Три крісла</span>
+      </div>
+      <h2>Троє людей, а не «вільний майстер»</h2>
+      <p class="sheet-lead">Записуючись, ви обираєте техніку — і людину, яка робить її щодня.</p>
+      <div class="crew" id="crew"></div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="sheet">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp stamp-pink">Візит</span>
+        <span class="tag" style="color:var(--muted)">Послідовність</span>
+      </div>
+      <h2>Як проходить перший візит</h2>
+      <p class="sheet-lead">Порядок фіксований — саме він тримає ціну й результат передбачуваними.</p>
+      <div class="tape" id="tape"></div>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section class="sheet" id="book">
+    <div class="wrap">
+      <div class="sheet-head">
+        <span class="stamp">Запис</span>
+      </div>
+      <h2>Залиште контакти</h2>
+      <p class="sheet-lead">Адміністратор передзвонить упродовж години в робочий час і підтвердить вікно.</p>
+      <div class="book">
+        <div class="book-in">
+          <div id="slot">
+            <form class="f" id="bf" novalidate>
+              <div>
+                <label for="bName">Ім’я</label>
+                <input id="bName" name="name" type="text" placeholder="Як до вас звертатися">
+              </div>
+              <div>
+                <label for="bPhone">Телефон</label>
+                <input id="bPhone" name="phone" type="tel" placeholder="+380 __ ___ __ __">
+              </div>
+              <div class="row">
+                <div>
+                  <label for="bServ">Послуга</label>
+                  <select id="bServ" name="service">
+                    <option>Стрижка + укладка</option>
+                    <option>Колір: тонування</option>
+                    <option>Колір: складне освітлення</option>
+                    <option>Завивка</option>
+                    <option>Діагностика та консультація</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="bMast">Майстер</label>
+                  <select id="bMast" name="master">
+                    <option>Будь-хто вільний</option>
+                    <option>Ірина — колористика</option>
+                    <option>Марта — стрижки</option>
+                    <option>Дмитро — завивка</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="bDate">Бажаний день</label>
+                <input id="bDate" name="date" type="date">
+              </div>
+              <button class="btn" type="submit">Надіслати заявку</button>
+              <p class="note">Демонстраційний макет: заявка формується у вікні браузера й нікуди не надсилається.</p>
+            </form>
+          </div>
+          <div class="where">
+            <div>
+              <b>вул. Кирилівська, 14</b>
+              <span>Київ, Поділ · вхід з двору, домофон 14</span>
+            </div>
+            <div>
+              <b class="mono">+380 (44) 000-00-00</b>
+              <span>Дзвінки й повідомлення 09:00–20:00</span>
+            </div>
+            <div style="border-bottom:none">
+              <b style="margin-bottom:8px">Графік</b>
+              <div class="h"><span>Пн — Пт</span><span>09:00 — 20:00</span></div>
+              <div class="h"><span>Сб</span><span>10:00 — 18:00</span></div>
+              <div class="h"><span>Нд</span><span>вихідний</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="end">
+  <div class="wrap end-in">
+    <div>
+      <div class="logo" style="font-size:18px">ПАС<b>МО</b></div>
+      <small>Демонстраційний макет для портфоліо. Назва студії, адреса, ціни, майстри та контакти вигадані й не належать реальному салону.</small>
+    </div>
+    <div class="tag" style="color:var(--muted)">Стрижки · Колористика · Завивки</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var CUTS = [
+    { name:"Боб", angle:"кут 0°", min:.86, max:.9, jit:0,
+      form:"Одна довжина, вага внизу — зріз читається лінією",
+      style:"Брашинг 10 хв, кінчики всередину",
+      renew:"кожні 6–8 тижнів" },
+    { name:"Каскад", angle:"кут 45°", min:.42, max:.95, jit:.02,
+      form:"М’які шари від вилиці, довжина внизу лишається",
+      style:"Дифузор або брашинг, 15 хв",
+      renew:"кожні 10–12 тижнів" },
+    { name:"Шеґ", angle:"кут 60°", min:.3, max:.86, jit:.08,
+      form:"Рвана текстура, максимум руху й повітря",
+      style:"Крем-текстуратор на сухе, без фена",
+      renew:"кожні 8–10 тижнів" },
+    { name:"Коротка", angle:"кут 90°", min:.12, max:.5, jit:.03,
+      form:"Короткий перехід від потилиці, чиста окантовка",
+      style:"Паста або віск, 2 хв",
+      renew:"кожні 3–4 тижні" }
+  ];
+
+  var TONES = [
+    { n:1,  hex:"#141110", name:"Чорний",               what:"Максимальна глибина, жодного просвіту",       time:"1 год 30 хв", f:"1.0 + окисник 3 % · 35 хв" },
+    { n:2,  hex:"#221A17", name:"Дуже темний шатен",    what:"Темна база з теплим підтоном",                time:"1 год 30 хв", f:"2.0 + окисник 3 % · 35 хв" },
+    { n:3,  hex:"#35251E", name:"Темний шатен",         what:"Глибокий каштан, тримає блиск",               time:"1 год 40 хв", f:"3.0 + окисник 3 % · 35 хв" },
+    { n:4,  hex:"#4A3226", name:"Шатен",                what:"Найпоширеніша натуральна база",               time:"1 год 40 хв", f:"4.0 + окисник 6 % · 35 хв" },
+    { n:5,  hex:"#63412C", name:"Світлий шатен",        what:"База, на якій добре читається мідь",          time:"1 год 45 хв", f:"5.4 + окисник 6 % · 35 хв" },
+    { n:6,  hex:"#7E5636", name:"Темний блонд",         what:"Межа, після якої вмикається освітлення",      time:"2 год",       f:"6.31 + окисник 6 % · 40 хв" },
+    { n:7,  hex:"#9B7448", name:"Блонд",                what:"Тепле світло по всій довжині",                time:"2 год 30 хв", f:"7.13 + окисник 9 % · 40 хв" },
+    { n:8,  hex:"#B99461", name:"Світлий блонд",        what:"Потрібне освітлення на 1–2 рівні",            time:"3–4 год",     f:"освітлення + тонування 8.1 · 2 %" },
+    { n:9,  hex:"#D3B588", name:"Дуже світлий блонд",   what:"Освітлення + обов’язкове тонування",          time:"4–5 год",     f:"освітлення до 9 + 9.21 · 2 % · 15 хв" },
+    { n:10, hex:"#E6D3AE", name:"Екстра світлий блонд", what:"Тільки на здоровому волоссі, з тестом пасма", time:"5–6 год",     f:"освітлення до 10 + 10.21 · 2 % · 12 хв" }
+  ];
+
+  var PRICE = [
+    ["Стрижка", [
+      ["Жіноча стрижка + укладка","1 год 15 хв","900 ₴"],
+      ["Чоловіча стрижка","45 хв","550 ₴"],
+      ["Окантовка, чубчик","20 хв","250 ₴"],
+      ["Дитяча, до 12 років","40 хв","450 ₴"]
+    ]],
+    ["Колористика", [
+      ["Тонування в один тон","2 год","від 1 400 ₴"],
+      ["Забарвлення коренів","1 год 30 хв","від 1 200 ₴"],
+      ["Балаяж, шатуш","3–4 год","від 3 400 ₴"],
+      ["AirTouch, складне освітлення","4–6 год","від 4 200 ₴"]
+    ]],
+    ["Завивка", [
+      ["Біозавивка, до плечей","2 год 30 хв","від 2 600 ₴"],
+      ["Карвінг, легка хвиля","2 год","від 2 200 ₴"],
+      ["Прикоренева, об’єм","1 год 30 хв","від 1 600 ₴"]
+    ]],
+    ["Догляд", [
+      ["Діагностика та консультація","20 хв","безкоштовно"],
+      ["Реконструкція","50 хв","від 1 200 ₴"],
+      ["Укладка","40 хв","600 ₴"]
+    ]]
+  ];
+
+  var CREW = [
+    { i:"І", name:"Ірина", role:"Колористка · 11 років",
+      txt:"Веде складне освітлення та повернення в натуральний. Любить роботу з мідним і рудим пігментом.",
+      sk:["AirTouch","Балаяж","Тонування","Корекція жовтизни"] },
+    { i:"М", name:"Марта", role:"Стилістка-технолог · 8 років",
+      txt:"Геометрія й коротка форма: боб, каре, підстрижений верх. Пояснює, як тримати форму між візитами.",
+      sk:["Боб і каре","Каскад","Шеґ","Чубчик"] },
+    { i:"Д", name:"Дмитро", role:"Майстер завивки · 6 років",
+      txt:"Біозавивка й карвінг, зокрема на тонкому та фарбованому волоссі. Рахує склад під стан пасма.",
+      sk:["Біозавивка","Карвінг","Прикоренева","Догляд після"] }
+  ];
+
+  var STEPS = [
+    ["01","Діагностика","Дивимось структуру, пористість і що вже було на волоссі. Без цього формула — вгадування.","20 хв · безкоштовно"],
+    ["02","Рішення й ціна","Показуємо формулу та результат, якого вона реально дасть саме вам. Суму фіксуємо до початку.","10 хв"],
+    ["03","Робота","Колір, зріз або завивка. Кожен етап коментуємо — ви бачите, що відбувається.","від 45 хв"],
+    ["04","Догляд","Домашня схема на 6 тижнів і дата наступного візиту, щоб форма й тон не зійшли.","10 хв"]
+  ];
+
+  function el(t, c, h) { var n = document.createElement(t); if (c) n.className = c; if (h !== undefined) n.innerHTML = h; return n; }
+  function ns(t, a) { var n = document.createElementNS("http://www.w3.org/2000/svg", t); for (var k in a) n.setAttribute(k, a[k]); return n; }
+  function put(id, v) { document.getElementById(id).textContent = v; }
+  function ink(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  /* ---- cut ---- */
+  (function () {
+    var pills = document.getElementById("pills");
+    var svg = document.getElementById("cutSvg");
+
+    function draw(c) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var n = 14, top = 16, span = 138, pts = [];
+      for (var i = 0; i < n; i++) {
+        var t = i / (n - 1);
+        var r = c.min + (c.max - c.min) * t + (c.jit ? Math.sin(i * 5.5) * c.jit : 0);
+        r = Math.max(.1, Math.min(1, r));
+        var x = 26 + i * ((420 - 56) / (n - 1));
+        var y = top + span * r;
+        pts.push(x + " " + y);
+        svg.appendChild(ns("line", { x1:x, y1:top, x2:x, y2:y, stroke:"currentColor", "stroke-width":"5", "stroke-linecap":"butt" }));
+      }
+      svg.appendChild(ns("path", {
+        d:"M " + pts.join(" L "), fill:"none", stroke:"var(--pink)", "stroke-width":"3", "stroke-linejoin":"round"
+      }));
+      svg.appendChild(ns("line", { x1:14, y1:top, x2:406, y2:top, stroke:"currentColor", "stroke-width":"2" }));
+    }
+
+    function pick(i) {
+      var c = CUTS[i];
+      Array.prototype.forEach.call(pills.children, function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      put("angle", c.angle); put("sForm", c.form); put("sStyle", c.style); put("sRenew", c.renew);
+      draw(c);
+    }
+
+    CUTS.forEach(function (c, i) {
+      var b = el("button", "pill", c.name);
+      b.type = "button"; b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { pick(i); });
+      pills.appendChild(b);
+    });
+    pick(1);
+  })();
+
+  /* ---- tones ---- */
+  (function () {
+    var host = document.getElementById("tones");
+    function pick(i) {
+      var T = TONES[i];
+      Array.prototype.forEach.call(host.children, function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      document.getElementById("recipe").textContent = T.f;
+      put("tName", T.n + " · " + T.name); put("tWhat", T.what); put("tTime", T.time);
+    }
+    TONES.forEach(function (T, i) {
+      var b = el("button", "tone", String(T.n));
+      b.type = "button";
+      b.style.background = T.hex;
+      b.style.color = T.n >= 7 ? "rgba(20,17,16,.75)" : "rgba(245,240,231,.8)";
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "Рівень " + T.n + ", " + T.name);
+      b.addEventListener("click", function () { pick(i); });
+      host.appendChild(b);
+    });
+    pick(7);
+  })();
+
+  /* ---- curl ---- */
+  (function () {
+    var svg = document.getElementById("curlSvg");
+    var range = document.getElementById("cRange");
+
+    function info(mm) {
+      if (mm <= 13) return { t:"Пружна спіраль", res:"Дрібний щільний завиток, довжина візуально коротшає на 5–8 см", hold:"4–6 місяців", who:"густе пряме волосся, що не тримає форму" };
+      if (mm <= 20) return { t:"Класичний локон", res:"Виражений локон, який розкладається пальцями", hold:"3–5 місяців", who:"середня довжина без сильного освітлення" };
+      if (mm <= 26) return { t:"М’яка хвиля", res:"Широка хвиля від середини довжини", hold:"2–4 місяці", who:"довге волосся, коли треба рух, а не кучері" };
+      return { t:"Об’єм", res:"Ледь помітна хвиля й підйом біля коренів", hold:"2–3 місяці", who:"тонке волосся, що швидко опадає" };
+    }
+    function draw(mm) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var top = 12, bot = 156, amp = 4 + (mm - 9) * 1.1, wave = 10 + (mm - 9) * 2.2;
+      for (var k = 0; k < 4; k++) {
+        var bx = 54 + k * 64, d = "M " + bx + " " + top;
+        for (var y = top; y <= bot; y += 4) {
+          var t = (y - top) / (bot - top);
+          var a = amp * Math.min(1, t * 2.6);
+          d += " L " + (bx + a * Math.sin((y - top) / wave + k * .6)).toFixed(1) + " " + y;
+        }
+        svg.appendChild(ns("path", {
+          d:d, fill:"none",
+          stroke: k === 1 ? "var(--pink)" : "currentColor",
+          "stroke-width": k === 1 ? "5" : "3.5",
+          "stroke-linecap":"round"
+        }));
+      }
+      svg.appendChild(ns("circle", { cx:266, cy:26, r:Math.max(4, mm / 2.6), fill:"none", stroke:"var(--blue)", "stroke-width":"3" }));
+    }
+    function upd() {
+      var mm = parseInt(range.value, 10), i = info(mm);
+      put("cVal", mm); put("cType", i.t); put("cRes", i.res); put("cHold", i.hold); put("cWho", i.who);
+      draw(mm);
+    }
+    range.addEventListener("input", upd);
+    upd();
+  })();
+
+  /* ---- price ---- */
+  (function () {
+    var host = document.getElementById("ticket");
+    PRICE.forEach(function (g) {
+      var t = el("div", "ticket");
+      var cap = el("div", "ticket-cap");
+      cap.appendChild(el("span", null, g[0]));
+      cap.appendChild(el("span", null, g[1].length + " позицій"));
+      t.appendChild(cap);
+      g[1].forEach(function (r) {
+        var row = el("div", "tick");
+        row.appendChild(el("div", "n", r[0]));
+        row.appendChild(el("div", "p", r[2]));
+        row.appendChild(el("div", "d", r[1]));
+        t.appendChild(row);
+      });
+      host.appendChild(t);
+    });
+    var foot = el("div", "ticket");
+    foot.appendChild(el("div", "ticket-foot", "Складне освітлення рахуємо за довжиною та кількістю барвника: остаточну суму називаємо після діагностики й записуємо в картку — вона не змінюється по ходу роботи."));
+    host.appendChild(foot);
+  })();
+
+  /* ---- crew ---- */
+  (function () {
+    var host = document.getElementById("crew");
+    CREW.forEach(function (m) {
+      var row = el("div", "crew-row");
+      row.appendChild(el("div", "badge", m.i));
+      var who = el("div");
+      who.appendChild(el("h3", null, m.name));
+      who.appendChild(el("div", "role", m.role));
+      row.appendChild(who);
+      var txt = el("div", "txt");
+      txt.appendChild(el("p", null, m.txt));
+      var sk = el("div", "sk");
+      m.sk.forEach(function (s) { sk.appendChild(el("span", null, s)); });
+      txt.appendChild(sk);
+      row.appendChild(txt);
+      host.appendChild(row);
+    });
+  })();
+
+  /* ---- steps ---- */
+  (function () {
+    var host = document.getElementById("tape");
+    STEPS.forEach(function (s) {
+      var d = el("div", "tape-item");
+      d.appendChild(el("div", "num", s[0]));
+      d.appendChild(el("h3", null, s[1]));
+      d.appendChild(el("p", null, s[2]));
+      d.appendChild(el("div", "when", s[3]));
+      host.appendChild(d);
+    });
+  })();
+
+  /* ---- booking ---- */
+  (function () {
+    var form = document.getElementById("bf");
+    var fName = form.elements.namedItem("name");
+    var fPhone = form.elements.namedItem("phone");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = fName.value.trim(), phone = fPhone.value.trim();
+      if (!name || !phone) {
+        var miss = !name ? fName : fPhone;
+        miss.style.borderColor = "var(--pink)";
+        miss.focus();
+        return;
+      }
+      var dv = form.elements.namedItem("date").value;
+      var day = dv ? new Date(dv + "T00:00").toLocaleDateString("uk-UA", { day:"numeric", month:"long" }) : "як буде зручно";
+
+      var done = el("div", "done2");
+      done.appendChild(el("h3", null, "Заявку сформовано"));
+      done.appendChild(el("p", null, name + ", ми передзвонимо на " + phone + " і підтвердимо час."));
+      var dl = document.createElement("dl");
+      [["Послуга", form.elements.namedItem("service").value],
+       ["Майстер", form.elements.namedItem("master").value],
+       ["День", day]].forEach(function (p) {
+        dl.appendChild(el("dt", null, p[0]));
+        dl.appendChild(el("dd", null, p[1]));
+      });
+      done.appendChild(dl);
+      done.appendChild(el("p", "note", "Демонстраційний макет — дані залишилися у вашому браузері."));
+      var again = el("button", "btn btn-plain", "Заповнити ще раз");
+      again.type = "button";
+      again.style.justifySelf = "start";
+      again.style.color = "var(--on-blue)";
+      again.style.borderColor = "var(--on-blue)";
+      again.style.boxShadow = "5px 5px 0 var(--on-blue)";
+      again.addEventListener("click", function () {
+        document.getElementById("slot").replaceChildren(form);
+        form.reset();
+        fName.style.borderColor = "";
+        fPhone.style.borderColor = "";
+      });
+      done.appendChild(again);
+      document.getElementById("slot").replaceChildren(done);
+    });
+  })();
+})();
+</script>
+</body>
+</html>

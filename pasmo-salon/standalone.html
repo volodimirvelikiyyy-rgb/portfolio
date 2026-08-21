@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><text%20y='.9em'%20font-size='90'>✂️</text></svg>">
+<title>Студія ПАСМО</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --bg:#E9E9E6;
+  --surface:#F5F4F2;
+  --surface-2:#DFDFDB;
+  --ink:#1C1D1B;
+  --muted:#6B6C66;
+  --line:rgba(28,29,27,.14);
+  --line-soft:rgba(28,29,27,.07);
+  --accent:#8C3A2E;
+  --accent-2:#A9762F;
+  --accent-soft:rgba(140,58,46,.10);
+  --shadow:0 1px 2px rgba(28,29,27,.05), 0 18px 40px -28px rgba(28,29,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171614;
+    --surface:#201F1C;
+    --surface-2:#2B2926;
+    --ink:#EDEAE4;
+    --muted:#9B968C;
+    --line:rgba(237,234,228,.16);
+    --line-soft:rgba(237,234,228,.08);
+    --accent:#CE6754;
+    --accent-2:#D6A25E;
+    --accent-soft:rgba(206,103,84,.14);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px -30px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171614;
+  --surface:#201F1C;
+  --surface-2:#2B2926;
+  --ink:#EDEAE4;
+  --muted:#9B968C;
+  --line:rgba(237,234,228,.16);
+  --line-soft:rgba(237,234,228,.08);
+  --accent:#CE6754;
+  --accent-2:#D6A25E;
+  --accent-soft:rgba(206,103,84,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px -30px rgba(0,0,0,.9);
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Manrope","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Unbounded","Manrope",sans-serif;font-weight:800;line-height:1.02;letter-spacing:-.015em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(20px,5vw,56px)}
+.mono{font-family:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ---------- header ---------- */
+.top{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.top-in{display:flex;align-items:center;gap:24px;padding-block:14px}
+.brand{font-family:"Unbounded",sans-serif;font-weight:800;font-size:16px;letter-spacing:.10em}
+.brand span{color:var(--accent)}
+.top-nav{margin-left:auto;display:flex;gap:22px;flex-wrap:wrap}
+.top-nav a{
+  font-size:13px;letter-spacing:.04em;color:var(--muted);text-decoration:none;
+  padding-block:4px;border-bottom:1px solid transparent;transition:color .2s, border-color .2s;
+}
+.top-nav a:hover{color:var(--ink);border-color:var(--accent)}
+.top .btn-book{white-space:nowrap}
+@media (max-width:820px){.top-nav{display:none}}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 22px;border:1px solid var(--ink);border-radius:999px;
+  background:var(--ink);color:var(--bg);
+  font-size:14px;font-weight:500;letter-spacing:.02em;text-decoration:none;cursor:pointer;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1), background .2s, color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{padding:9px 16px;font-size:13px}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(48px,8vw,96px);padding-bottom:clamp(40px,6vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:end}
+@media (max-width:940px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero h1{font-size:clamp(30px,5vw,58px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-lead{margin-top:26px;max-width:52ch;color:var(--muted);font-size:clamp(16px,1.5vw,18px)}
+.hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{
+  margin-top:38px;display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:20px;border-top:1px solid var(--line);
+}
+.hero-meta div{display:flex;flex-direction:column;gap:2px}
+.hero-meta b{font-family:"Unbounded",sans-serif;font-size:19px;font-weight:700}
+.hero-meta span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+.hero-art{
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;
+  padding:18px 18px 12px;box-shadow:var(--shadow);
+}
+.hero-art svg{display:block;width:100%;height:auto}
+.hero-art-legend{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.hero-art-legend span{text-align:center}
+
+/* ---------- section frame ---------- */
+.sec{padding-block:clamp(56px,8vw,104px);border-top:1px solid var(--line-soft)}
+.sec-grid{display:grid;grid-template-columns:150px minmax(0,1fr);gap:clamp(20px,4vw,56px)}
+@media (max-width:900px){.sec-grid{grid-template-columns:1fr;gap:22px}}
+.rail{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:14px}
+@media (max-width:900px){.rail{position:static;flex-direction:row;align-items:center;gap:12px}}
+.rail-mark{width:34px;height:1px;background:var(--accent)}
+@media (max-width:900px){.rail-mark{width:22px}}
+.sec h2{font-size:clamp(24px,3vw,34px);max-width:20ch}
+.sec-lead{margin-top:16px;max-width:62ch;color:var(--muted)}
+
+/* ---------- technique blocks ---------- */
+.tech{display:grid;gap:clamp(34px,5vw,64px)}
+.tech-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);align-items:start}
+@media (max-width:820px){.tech-block{grid-template-columns:1fr}}
+.tech-head h3{font-size:clamp(19px,2vw,24px)}
+.tech-head p{margin-top:14px;color:var(--muted);max-width:44ch}
+.tech-list{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:9px}
+.tech-list li{display:flex;gap:11px;font-size:14.5px;color:var(--muted)}
+.tech-list li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--accent-2)}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;
+  padding:20px;box-shadow:var(--shadow);
+}
+.panel-title{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:16px}
+.panel-title .eyebrow{white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  padding:7px 14px;border-radius:999px;border:1px solid var(--line);
+  background:transparent;font-size:13px;cursor:pointer;
+  transition:background .18s, border-color .18s, color .18s;
+}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.readout{
+  margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);
+  display:grid;gap:6px;
+}
+.readout-row{display:flex;gap:12px;align-items:baseline;font-size:13.5px}
+.readout-row b{
+  flex:none;width:112px;font-family:"JetBrains Mono",monospace;font-weight:400;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.cut-svg{display:block;width:100%;height:auto;margin-top:4px}
+
+/* colour scale */
+.levels{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.level{
+  aspect-ratio:1/2.1;border-radius:3px;border:1px solid rgba(0,0,0,.22);cursor:pointer;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .18s;
+}
+.level:hover{transform:translateY(-3px)}
+.level[aria-pressed="true"]{box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--accent);transform:translateY(-3px)}
+.levels-axis{
+  display:flex;justify-content:space-between;margin-top:8px;
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.formula{
+  margin-top:14px;padding:12px 14px;border-radius:3px;
+  background:var(--accent-soft);border:1px solid var(--line-soft);
+  font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.01em;
+}
+
+/* curl */
+.curl-wrap{display:grid;grid-template-columns:1fr 132px;gap:18px;align-items:center}
+@media (max-width:520px){.curl-wrap{grid-template-columns:1fr}}
+.curl-svg{display:block;width:100%;height:auto}
+.slider{width:100%;accent-color:var(--accent);margin-top:6px}
+.curl-num{font-family:"Unbounded",sans-serif;font-weight:700;font-size:28px;line-height:1}
+.curl-num small{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:400;color:var(--muted);margin-left:4px}
+
+/* ---------- price ---------- */
+.price-group{margin-top:30px}
+.price-group:first-of-type{margin-top:6px}
+.price-cap{
+  display:flex;align-items:center;gap:14px;margin-bottom:10px;
+}
+.price-cap h3{font-size:15px;font-family:"JetBrains Mono",monospace;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.price-cap i{flex:1;height:1px;background:var(--line);display:block}
+.price-row{
+  display:grid;grid-template-columns:minmax(0,1fr) 96px 118px;gap:14px;align-items:baseline;
+  padding:11px 0;border-bottom:1px solid var(--line-soft);
+}
+.price-row:hover{background:var(--accent-soft)}
+.price-row .t{font-size:15px}
+.price-row .d{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--muted);text-align:right}
+.price-row .p{font-family:"JetBrains Mono",monospace;font-size:15px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:600px){
+  .price-row{grid-template-columns:minmax(0,1fr) 104px}
+  .price-row .d{grid-column:1/2;text-align:left;order:3}
+  .price-row .p{order:2}
+}
+.price-note{margin-top:20px;font-size:13.5px;color:var(--muted);max-width:58ch}
+
+/* ---------- masters ---------- */
+.masters{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.master{
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;padding:22px;
+  display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow);
+}
+.master-top{display:flex;align-items:center;gap:13px}
+.mono-circle{
+  width:46px;height:46px;flex:none;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:"Unbounded",sans-serif;font-weight:700;font-size:17px;color:#F5F0E7;
+}
+.master h3{font-size:17px}
+.master .role{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.master p{font-size:14px;color:var(--muted)}
+.master .skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.skill{font-family:"JetBrains Mono",monospace;font-size:11px;padding:4px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--line-soft)}
+.step{background:var(--bg);padding:24px 20px;display:flex;flex-direction:column;gap:9px}
+.step-n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.16em}
+.step h3{font-size:16px}
+.step p{font-size:14px;color:var(--muted)}
+.step .t{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);margin-top:auto;padding-top:8px;letter-spacing:.08em}
+
+/* ---------- booking ---------- */
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,44px);align-items:start}
+@media (max-width:820px){.book-grid{grid-template-columns:1fr}}
+.form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select{
+  padding:12px 14px;border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);width:100%;font-size:15px;
+  transition:border-color .18s;
+}
+.field input:hover,.field select:hover{border-color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+.form-note{font-size:12.5px;color:var(--muted)}
+.done{
+  border:1px solid var(--accent);border-radius:4px;padding:24px;background:var(--accent-soft);
+  display:grid;gap:12px;
+}
+.done h3{font-size:19px}
+.done dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+.done dt{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.done dd{margin:0}
+.contacts{display:grid;gap:18px}
+.contact-item{display:grid;gap:3px;padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+.contact-item b{font-family:"Unbounded",sans-serif;font-size:15.5px;font-weight:700}
+.contact-item span{font-size:14px;color:var(--muted)}
+.hours{font-family:"JetBrains Mono",monospace;font-size:13.5px;display:grid;gap:4px}
+.hours div{display:flex;justify-content:space-between;gap:14px;max-width:260px}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);padding-block:34px 44px;margin-top:clamp(40px,6vw,80px)}
+.foot-in{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-end}
+.foot small{display:block;max-width:46ch;color:var(--muted);font-size:12.5px;line-height:1.6}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(16px)}
+.rv.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand">ПАС<span>М</span>О</div>
+    <nav class="top-nav">
+      <a href="#tech">Техніки</a>
+      <a href="#price">Прайс</a>
+      <a href="#team">Майстри</a>
+      <a href="#visit">Візит</a>
+      <a href="#book">Контакти</a>
+    </nav>
+    <a class="btn btn-sm btn-book" href="#book">Записатися</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Студія волосся · Київ, Поділ</div>
+        <h1 style="margin-top:20px">Стрижка тримає форму.<br><em>Колір</em> тримає світло.<br>Завивка тримає рух.</h1>
+        <p class="hero-lead">Ми робимо тільки волосся — і робимо це трьома інструментами: чиста геометрія зрізу, прорахована формула барвника та завивка, підібрана під структуру пасма. Ціну називаємо до першого дотику ножицями.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#book">Записатися на діагностику</a>
+          <a class="btn btn-ghost" href="#price">Прайс і тривалість</a>
+        </div>
+        <div class="hero-meta">
+          <div><b class="mono">12</b><span>років студії</span></div>
+          <div><b class="mono">3</b><span>майстри, кожен — у своїй техніці</span></div>
+          <div><b class="mono">20 хв</b><span>безкоштовна діагностика</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg id="heroArt" viewBox="0 0 600 300" role="img" aria-label="Три панелі: лінія зрізу, перехід глибини тону та хвиля завивки"></svg>
+        <div class="hero-art-legend">
+          <span>Лінія зрізу</span><span>Глибина тону</span><span>Форма хвилі</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNIQUES -->
+  <section class="sec" id="tech">
+    <div class="wrap sec-grid">
+      <div class="rail">
+        <span class="rail-mark"></span>
+        <span class="eyebrow">Три техніки</span>
+      </div>
+      <div>
+        <h2>Кожна техніка — це рішення, а не назва послуги</h2>
+        <p class="sec-lead">Нижче — те, що майстер тримає в голові під час роботи: кут відтягування, рівень глибини тону і діаметр коклюшки. Спробуйте покрутити самі — так простіше пояснити, чого ви хочете, коли сядете в крісло.</p>
+
+        <div class="tech" style="margin-top:40px">
+
+          <!-- CUT -->
+          <article class="tech-block rv">
+            <div class="tech-head">
+              <div class="eyebrow">Геометрія</div>
+              <h3 style="margin-top:10px">Стрижка</h3>
+              <p>Форму задає не назва зачіски, а кут, під яким пасмо відтягують від голови. Нуль градусів — рівна вага внизу, шістдесят — легкий рухливий верх.</p>
+              <ul class="tech-list">
+                <li>Сухий контрольний зріз наприкінці: на вологому волоссі довжина бреше на 1–2 см</li>
+                <li>Дивимось напрямок росту й вихори до того, як почали різати</li>
+                <li>Показуємо, як укласти вдома за 10 хвилин — інакше форма живе один день</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <div class="panel-title">
+                <span class="eyebrow">Схема зрізу</span>
+                <span class="eyebrow" id="cutAngle">0°</span>
+              </div>
+              <div class="chips" id="cutChips"></div>
+              <svg class="cut-svg" id="cutSvg" viewBox="0 0 420 190" role="img" aria-label="Діаграма довжини пасом і лінії зрізу"></svg>
+              <div class="readout">
+                <div class="readout-row"><b>Форма</b><span id="cutForm"></span></div>
+                <div class="readout-row"><b>Укладка</b><span id="cutStyle"></span></div>
+                <div class="readout-row"><b>Оновлення</b><span id="cutRenew"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- COLOUR -->
+          <article class="tech-block rv">
+            <div class="tech-head">
+              <div class="eyebrow">Колір</div>
+              <h3 style="margin-top:10px">Колористика</h3>
+              <p>Перше число у формулі — глибина тону, від 1 (чорний) до 10 (найсвітліший блонд). Ваш природний рівень і бажаний визначають усе інше: чи потрібне освітлення, скільки триватиме робота і скільки це коштує.</p>
+              <ul class="tech-list">
+                <li>Тест на пористість і залишок старого пігменту — до змішування барвника</li>
+                <li>Різниця більш ніж у 3 рівні за один візит — це вже освітлення, а не фарбування</li>
+                <li>Рудий і мідний пігмент вимиваються першими: тонування раз на 5–6 тижнів</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <div class="panel-title">
+                <span class="eyebrow">Шкала глибини тону</span>
+                <span class="eyebrow">Оберіть рівень</span>
+              </div>
+              <div class="levels" id="levels"></div>
+              <div class="levels-axis"><span>1 · чорний</span><span>10 · платина</span></div>
+              <div class="formula mono" id="formula"></div>
+              <div class="readout">
+                <div class="readout-row"><b>Рівень</b><span id="lvlName"></span></div>
+                <div class="readout-row"><b>Що дає</b><span id="lvlWhat"></span></div>
+                <div class="readout-row"><b>У кріслі</b><span id="lvlTime"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PERM -->
+          <article class="tech-block rv">
+            <div class="tech-head">
+              <div class="eyebrow">Текстура</div>
+              <h3 style="margin-top:10px">Завивка</h3>
+              <p>Розмір завитка задає діаметр коклюшки — від 9 мм пружної спіралі до 32 мм ледь помітної хвилі. Склад підбираємо під стан волосся: після освітлення працюємо тільки м’якими біосистемами.</p>
+              <ul class="tech-list">
+                <li>Не робимо завивку раніше ніж за 2 тижні після фарбування</li>
+                <li>Прикоренева зона — окрема техніка: об’єм без завитка по довжині</li>
+                <li>Перші 48 годин — без миття і гумок, інакше форма «сяде»</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <div class="panel-title">
+                <span class="eyebrow">Діаметр коклюшки</span>
+                <span class="eyebrow" id="curlType"></span>
+              </div>
+              <div class="curl-wrap">
+                <svg class="curl-svg" id="curlSvg" viewBox="0 0 300 170" role="img" aria-label="Форма завитка залежно від діаметра коклюшки"></svg>
+                <div>
+                  <div class="curl-num mono"><span id="curlVal">18</span><small>мм</small></div>
+                  <label class="eyebrow" for="curlRange" style="display:block;margin-top:8px">Пересуньте</label>
+                  <input class="slider" id="curlRange" type="range" min="9" max="32" step="1" value="18" aria-label="Діаметр коклюшки в міліметрах">
+                </div>
+              </div>
+              <div class="readout">
+                <div class="readout-row"><b>Результат</b><span id="curlRes"></span></div>
+                <div class="readout-row"><b>Тримається</b><span id="curlHold"></span></div>
+                <div class="readout-row"><b>Кому</b><span id="curlWho"></span></div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section class="sec" id="price">
+    <div class="wrap sec-grid">
+      <div class="rail">
+        <span class="rail-mark"></span>
+        <span class="eyebrow">Прайс</span>
+      </div>
+      <div>
+        <h2>Ціна і час, який ви проведете в кріслі</h2>
+        <p class="sec-lead">Тривалість вказана чесно, з урахуванням витримки барвника. Якщо робота виходить довшою — попереджаємо до початку, а не в процесі.</p>
+        <div id="priceList" style="margin-top:34px"></div>
+        <p class="price-note">Складне освітлення рахуємо за довжиною та кількістю барвника: остаточну суму називаємо після діагностики й записуємо в картку — вона не змінюється по ходу роботи.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="sec" id="team">
+    <div class="wrap sec-grid">
+      <div class="rail">
+        <span class="rail-mark"></span>
+        <span class="eyebrow">Майстри</span>
+      </div>
+      <div>
+        <h2>Троє людей, а не «вільний майстер»</h2>
+        <p class="sec-lead">У студії три крісла й три спеціалізації. Записуючись, ви обираєте конкретну техніку — і людину, яка робить її щодня.</p>
+        <div class="masters rv" id="masters" style="margin-top:34px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="sec" id="visit">
+    <div class="wrap sec-grid">
+      <div class="rail">
+        <span class="rail-mark"></span>
+        <span class="eyebrow">Візит</span>
+      </div>
+      <div>
+        <h2>Як проходить перший візит</h2>
+        <p class="sec-lead">Порядок фіксований — саме він тримає ціну й результат передбачуваними.</p>
+        <div class="steps rv" id="steps" style="margin-top:34px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section class="sec" id="book">
+    <div class="wrap sec-grid">
+      <div class="rail">
+        <span class="rail-mark"></span>
+        <span class="eyebrow">Запис</span>
+      </div>
+      <div>
+        <h2>Записатися</h2>
+        <p class="sec-lead">Залиште контакти — адміністратор передзвонить упродовж години в робочий час і підтвердить вікно.</p>
+        <div class="book-grid" style="margin-top:34px">
+          <div id="bookSlot">
+            <form class="form" id="bookForm" novalidate>
+              <div class="field">
+                <label for="fName">Ім’я</label>
+                <input id="fName" name="name" type="text" required placeholder="Як до вас звертатися">
+              </div>
+              <div class="field">
+                <label for="fPhone">Телефон</label>
+                <input id="fPhone" name="phone" type="tel" required placeholder="+380 __ ___ __ __">
+              </div>
+              <div class="two">
+                <div class="field">
+                  <label for="fService">Послуга</label>
+                  <select id="fService" name="service">
+                    <option>Стрижка + укладка</option>
+                    <option>Колористика: тонування</option>
+                    <option>Колористика: складне освітлення</option>
+                    <option>Завивка</option>
+                    <option>Діагностика та консультація</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="fMaster">Майстер</label>
+                  <select id="fMaster" name="master">
+                    <option>Будь-хто вільний</option>
+                    <option>Ірина — колористика</option>
+                    <option>Марта — стрижки</option>
+                    <option>Дмитро — завивка</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fDate">Бажаний день</label>
+                <input id="fDate" name="date" type="date">
+              </div>
+              <button class="btn" type="submit" style="justify-self:start;margin-top:4px">Надіслати заявку</button>
+              <p class="form-note">Це демонстраційний макет: заявка формується у вікні браузера й нікуди не надсилається.</p>
+            </form>
+          </div>
+
+          <div class="contacts">
+            <div class="contact-item">
+              <b>вул. Кирилівська, 14</b>
+              <span>Київ, Поділ · вхід з двору, домофон 14</span>
+            </div>
+            <div class="contact-item">
+              <b class="mono">+380 (44) 000-00-00</b>
+              <span>Дзвінки й повідомлення 09:00–20:00</span>
+            </div>
+            <div class="contact-item" style="border-bottom:none">
+              <span class="eyebrow" style="margin-bottom:6px">Графік</span>
+              <div class="hours">
+                <div><span>Пн — Пт</span><span>09:00 — 20:00</span></div>
+                <div><span>Сб</span><span>10:00 — 18:00</span></div>
+                <div><span>Нд</span><span>вихідний</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <div class="brand" style="font-size:16px">ПАС<span>М</span>О</div>
+      <small style="margin-top:10px">Демонстраційний макет для портфоліо. Назва студії, адреса, ціни, майстри та контакти вигадані й не належать реальному салону.</small>
+    </div>
+    <div class="eyebrow">Стрижки · Колористика · Завивки</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- data ---------- */
+  var CUTS = [
+    { id:"bob", name:"Боб-каре", angle:"0°",
+      form:"Одна довжина, вага зібрана внизу — зріз читається лінією",
+      style:"Брашинг 10 хв, кінчики всередину",
+      renew:"кожні 6–8 тижнів, інакше лінія «розлазиться»",
+      min:.86, max:.9, jitter:0, layers:false },
+    { id:"cascade", name:"Каскад", angle:"45°",
+      form:"М’які шари від вилиці, довжина внизу залишається",
+      style:"Дифузор або брашинг, 15 хв",
+      renew:"кожні 10–12 тижнів",
+      min:.42, max:.95, jitter:.02, layers:true },
+    { id:"shag", name:"Шеґ", angle:"60°",
+      form:"Рвана текстура, максимум руху й повітря",
+      style:"Крем-текстуратор на сухе, без фена",
+      renew:"кожні 8–10 тижнів",
+      min:.3, max:.86, jitter:.08, layers:true },
+    { id:"short", name:"Чоловіча", angle:"90°",
+      form:"Короткий перехід від потилиці, чиста окантовка",
+      style:"Паста або віск, 2 хв",
+      renew:"кожні 3–4 тижні",
+      min:.12, max:.5, jitter:.03, layers:true }
+  ];
+
+  var LEVELS = [
+    { n:1,  hex:"#141110", name:"Чорний",                  what:"Максимальна глибина, жодного просвіту",         time:"1 год 30 хв", f:"1.0 + окисник 3 % · 35 хв" },
+    { n:2,  hex:"#221A17", name:"Дуже темний шатен",       what:"Темна база з теплим підтоном",                  time:"1 год 30 хв", f:"2.0 + окисник 3 % · 35 хв" },
+    { n:3,  hex:"#35251E", name:"Темний шатен",            what:"Глибокий каштан, тримає блиск",                 time:"1 год 40 хв", f:"3.0 + окисник 3 % · 35 хв" },
+    { n:4,  hex:"#4A3226", name:"Шатен",                   what:"Найпоширеніша натуральна база",                 time:"1 год 40 хв", f:"4.0 + окисник 6 % · 35 хв" },
+    { n:5,  hex:"#63412C", name:"Світлий шатен",           what:"База, на якій добре читається мідь",            time:"1 год 45 хв", f:"5.4 + окисник 6 % · 35 хв" },
+    { n:6,  hex:"#7E5636", name:"Темний блонд",            what:"Межа, після якої вмикається освітлення",        time:"2 год",       f:"6.31 + окисник 6 % · 40 хв" },
+    { n:7,  hex:"#9B7448", name:"Блонд",                   what:"Тепле світло по всій довжині",                  time:"2 год 30 хв", f:"7.13 + окисник 9 % · 40 хв" },
+    { n:8,  hex:"#B99461", name:"Світлий блонд",           what:"Потрібне освітлення на 1–2 рівні",              time:"3–4 год",     f:"освітлення + тонування 8.1 · 2 %" },
+    { n:9,  hex:"#D3B588", name:"Дуже світлий блонд",      what:"Освітлення + обов’язкове тонування",            time:"4–5 год",     f:"освітлення до 9 + 9.21 · 2 % · 15 хв" },
+    { n:10, hex:"#E6D3AE", name:"Екстра світлий блонд",    what:"Тільки на здоровому волоссі, з тестом пасма",    time:"5–6 год",     f:"освітлення до 10 + 10.21 · 2 % · 12 хв" }
+  ];
+
+  var PRICES = [
+    { cap:"Стрижка", rows:[
+      ["Жіноча стрижка + укладка","1 год 15 хв","900 ₴"],
+      ["Чоловіча стрижка","45 хв","550 ₴"],
+      ["Окантовка, чубчик","20 хв","250 ₴"],
+      ["Дитяча, до 12 років","40 хв","450 ₴"]
+    ]},
+    { cap:"Колористика", rows:[
+      ["Тонування в один тон","2 год","від 1 400 ₴"],
+      ["Забарвлення коренів","1 год 30 хв","від 1 200 ₴"],
+      ["Балаяж, шатуш","3–4 год","від 3 400 ₴"],
+      ["AirTouch, складне освітлення","4–6 год","від 4 200 ₴"]
+    ]},
+    { cap:"Завивка", rows:[
+      ["Біозавивка, довжина до плечей","2 год 30 хв","від 2 600 ₴"],
+      ["Карвінг, легка хвиля","2 год","від 2 200 ₴"],
+      ["Прикоренева завивка, об’єм","1 год 30 хв","від 1 600 ₴"]
+    ]},
+    { cap:"Догляд", rows:[
+      ["Діагностика та консультація","20 хв","безкоштовно"],
+      ["Реконструкція, глибоке відновлення","50 хв","від 1 200 ₴"],
+      ["Укладка","40 хв","600 ₴"]
+    ]}
+  ];
+
+  var MASTERS = [
+    { i:"І", hex:"#8C3A2E", name:"Ірина", role:"Колористка · 11 років",
+      text:"Веде складне освітлення та повернення в натуральний. Любить роботу з мідним і рудим пігментом.",
+      skills:["AirTouch","Балаяж","Тонування","Корекція жовтизни"] },
+    { i:"М", hex:"#4A3226", name:"Марта", role:"Стилістка-технолог · 8 років",
+      text:"Геометрія й коротка форма: боб, каре, підстрижений верх. Пояснює, як тримати форму між візитами.",
+      skills:["Боб і каре","Каскад","Шеґ","Чубчик"] },
+    { i:"Д", hex:"#A9762F", name:"Дмитро", role:"Майстер завивки · 6 років",
+      text:"Біозавивка й карвінг, зокрема на тонкому та фарбованому волоссі. Рахує склад під стан пасма.",
+      skills:["Біозавивка","Карвінг","Прикоренева","Догляд після"] }
+  ];
+
+  var STEPS = [
+    { n:"01", h:"Діагностика", p:"Дивимось структуру, пористість і що вже було на волоссі. Без цього формула — вгадування.", t:"20 хв · безкоштовно" },
+    { n:"02", h:"Рішення й ціна", p:"Показуємо формулу та результат, якого вона реально дасть саме вам. Суму фіксуємо в картці до початку.", t:"10 хв" },
+    { n:"03", h:"Робота", p:"Колір, зріз або завивка. Кожен етап коментуємо — ви бачите, що відбувається, а не сидите наосліп.", t:"від 45 хв" },
+    { n:"04", h:"Догляд", p:"Домашня схема на 6 тижнів і дата наступного візиту, щоб форма й тон не встигли зійти.", t:"10 хв" }
+  ];
+
+  /* ---------- helpers ---------- */
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html !== undefined) n.innerHTML = html;
+    return n;
+  }
+  function ns(tag, attrs) {
+    var n = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function text(id, value) { document.getElementById(id).textContent = value; }
+
+  /* ---------- hero art ---------- */
+  (function heroArt() {
+    var svg = document.getElementById("heroArt");
+    var pw = 200, h = 300, top = 26, bottom = 274;
+
+    // panel 1 — cut line
+    var g1 = ns("g", {});
+    for (var i = 0; i < 11; i++) {
+      var x = 26 + i * 15;
+      var len = bottom - (i * 9);
+      g1.appendChild(ns("line", {
+        x1:x, y1:top, x2:x, y2:len,
+        stroke:"currentColor", "stroke-width":"1.4", "stroke-opacity":".45", "stroke-linecap":"round"
+      }));
+    }
+    g1.appendChild(ns("line", {
+      x1:22, y1:bottom + 4, x2:186, y2:bottom - 94,
+      stroke:"var(--accent)", "stroke-width":"1.6", "stroke-dasharray":"5 5"
+    }));
+    svg.appendChild(g1);
+
+    // panel 2 — depth of tone
+    var defs = ns("defs", {});
+    var grad = ns("linearGradient", { id:"toneGrad", x1:"0", y1:"1", x2:"0", y2:"0" });
+    grad.appendChild(ns("stop", { offset:"0", "stop-color":"#2A1E18" }));
+    grad.appendChild(ns("stop", { offset:".5", "stop-color":"#8A6039" }));
+    grad.appendChild(ns("stop", { offset:"1", "stop-color":"#E6D3AE" }));
+    defs.appendChild(grad);
+    svg.appendChild(defs);
+
+    var g2 = ns("g", {});
+    for (var j = 0; j < 9; j++) {
+      g2.appendChild(ns("rect", {
+        x: pw + 22 + j * 17, y: top, width: 11, height: bottom - top,
+        rx: 5.5, fill:"url(#toneGrad)", opacity: (j % 2 ? .78 : 1)
+      }));
+    }
+    for (var m = 0; m < 3; m++) {
+      var y = top + 62 + m * 74;
+      g2.appendChild(ns("line", {
+        x1: pw + 16, y1: y, x2: pw + 186, y2: y,
+        stroke:"var(--bg)", "stroke-width":"3", "stroke-opacity":".8"
+      }));
+    }
+    svg.appendChild(g2);
+
+    // panel 3 — wave
+    var g3 = ns("g", {});
+    for (var k = 0; k < 7; k++) {
+      var bx = pw * 2 + 30 + k * 22;
+      var d = "M " + bx + " " + top;
+      for (var y2 = top; y2 <= bottom; y2 += 6) {
+        var t = (y2 - top) / (bottom - top);
+        var amp = 9 * Math.min(1, t * 2.2);
+        d += " L " + (bx + amp * Math.sin((y2 - top) / 15 + k * .7)).toFixed(1) + " " + y2;
+      }
+      g3.appendChild(ns("path", {
+        d: d, fill:"none",
+        stroke: k % 3 === 0 ? "var(--accent-2)" : "currentColor",
+        "stroke-opacity": k % 3 === 0 ? ".9" : ".4",
+        "stroke-width":"1.6", "stroke-linecap":"round"
+      }));
+    }
+    svg.appendChild(g3);
+
+    // dividers
+    [pw, pw * 2].forEach(function (x) {
+      svg.appendChild(ns("line", {
+        x1:x, y1:14, x2:x, y2:286, stroke:"currentColor", "stroke-opacity":".16", "stroke-width":"1"
+      }));
+    });
+
+    // draw-in
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var paths = svg.querySelectorAll("line, path");
+      Array.prototype.forEach.call(paths, function (p, idx) {
+        var len = 320;
+        try { len = p.getTotalLength() || 320; } catch (e) {}
+        p.style.strokeDasharray = p.getAttribute("stroke-dasharray") || len;
+        if (!p.getAttribute("stroke-dasharray")) {
+          p.style.strokeDashoffset = len;
+          p.style.transition = "stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1) " + (idx * 22) + "ms";
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { p.style.strokeDashoffset = "0"; });
+          });
+        }
+      });
+    }
+  })();
+
+  /* ---------- cut diagram ---------- */
+  (function cut() {
+    var chips = document.getElementById("cutChips");
+    var svg = document.getElementById("cutSvg");
+
+    function draw(c) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var n = 16, top = 18, floor = 168, span = 150;
+      var pts = [];
+      for (var i = 0; i < n; i++) {
+        var t = i / (n - 1);
+        var ratio = c.min + (c.max - c.min) * t;
+        if (c.jitter) ratio += (Math.sin(i * 5.5) * c.jitter);
+        ratio = Math.max(.1, Math.min(1, ratio));
+        var x = 24 + i * ((420 - 52) / (n - 1));
+        var y = top + span * ratio;
+        pts.push([x, y]);
+        svg.appendChild(ns("line", {
+          x1:x, y1:top, x2:x, y2:y,
+          stroke:"currentColor", "stroke-width":"2", "stroke-opacity":".38", "stroke-linecap":"round"
+        }));
+      }
+      var d = "M " + pts.map(function (p) { return p[0] + " " + p[1]; }).join(" L ");
+      svg.appendChild(ns("path", {
+        d:d, fill:"none", stroke:"var(--accent)", "stroke-width":"1.8",
+        "stroke-linejoin":"round", "stroke-dasharray":"6 5"
+      }));
+      svg.appendChild(ns("line", {
+        x1:16, y1:top, x2:404, y2:top,
+        stroke:"currentColor", "stroke-width":"1", "stroke-opacity":".3"
+      }));
+      svg.appendChild(ns("line", {
+        x1:16, y1:floor + 6, x2:404, y2:floor + 6,
+        stroke:"currentColor", "stroke-width":"1", "stroke-opacity":".12"
+      }));
+    }
+
+    function select(idx) {
+      var c = CUTS[idx];
+      Array.prototype.forEach.call(chips.children, function (b, i) {
+        b.setAttribute("aria-pressed", i === idx ? "true" : "false");
+      });
+      text("cutAngle", "кут " + c.angle);
+      text("cutForm", c.form);
+      text("cutStyle", c.style);
+      text("cutRenew", c.renew);
+      draw(c);
+    }
+
+    CUTS.forEach(function (c, i) {
+      var b = el("button", "chip", c.name);
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { select(i); });
+      chips.appendChild(b);
+    });
+    select(1);
+  })();
+
+  /* ---------- colour levels ---------- */
+  (function colour() {
+    var box = document.getElementById("levels");
+
+    function select(idx) {
+      var L = LEVELS[idx];
+      Array.prototype.forEach.call(box.children, function (b, i) {
+        b.setAttribute("aria-pressed", i === idx ? "true" : "false");
+      });
+      document.getElementById("formula").textContent = L.f;
+      text("lvlName", L.n + " · " + L.name);
+      text("lvlWhat", L.what);
+      text("lvlTime", L.time);
+    }
+
+    LEVELS.forEach(function (L, i) {
+      var b = el("button", "level", String(L.n));
+      b.type = "button";
+      b.style.background = L.hex;
+      b.style.color = L.n >= 7 ? "rgba(20,17,16,.72)" : "rgba(245,240,231,.78)";
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "Рівень " + L.n + ", " + L.name);
+      b.addEventListener("click", function () { select(i); });
+      box.appendChild(b);
+    });
+    select(7);
+  })();
+
+  /* ---------- curl ---------- */
+  (function curl() {
+    var svg = document.getElementById("curlSvg");
+    var range = document.getElementById("curlRange");
+
+    function info(mm) {
+      if (mm <= 13) return { t:"Пружна спіраль", res:"Дрібний щільний завиток, довжина візуально коротшає на 5–8 см", hold:"4–6 місяців", who:"густе пряме волосся, що не тримає форму" };
+      if (mm <= 20) return { t:"Класичний локон", res:"Виражений локон, який розкладається пальцями", hold:"3–5 місяців", who:"середня довжина, волосся без сильного освітлення" };
+      if (mm <= 26) return { t:"М’яка хвиля", res:"Широка хвиля від середини довжини, ефект «після пляжу»", hold:"2–4 місяці", who:"довге волосся, коли потрібен рух, а не кучері" };
+      return { t:"Об’єм", res:"Ледь помітна хвиля й підйом біля коренів", hold:"2–3 місяці", who:"тонке волосся, що швидко опадає" };
+    }
+
+    function draw(mm) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var top = 12, bottom = 158;
+      var amp = 4 + (mm - 9) * 1.15;
+      var wave = 10 + (mm - 9) * 2.2;
+      for (var k = 0; k < 5; k++) {
+        var bx = 46 + k * 52;
+        var d = "M " + bx + " " + top;
+        for (var y = top; y <= bottom; y += 4) {
+          var t = (y - top) / (bottom - top);
+          var a = amp * Math.min(1, t * 2.6);
+          d += " L " + (bx + a * Math.sin((y - top) / wave + k * .55)).toFixed(1) + " " + y;
+        }
+        svg.appendChild(ns("path", {
+          d:d, fill:"none",
+          stroke: k === 2 ? "var(--accent)" : "currentColor",
+          "stroke-opacity": k === 2 ? ".95" : ".38",
+          "stroke-width": k === 2 ? "2.2" : "1.6",
+          "stroke-linecap":"round"
+        }));
+      }
+      svg.appendChild(ns("circle", {
+        cx:150, cy:top + 4, r: Math.max(3, mm / 3.2),
+        fill:"none", stroke:"var(--accent-2)", "stroke-width":"1.4", "stroke-opacity":".8"
+      }));
+    }
+
+    function update() {
+      var mm = parseInt(range.value, 10);
+      var i = info(mm);
+      text("curlVal", mm);
+      text("curlType", i.t);
+      text("curlRes", i.res);
+      text("curlHold", i.hold);
+      text("curlWho", i.who);
+      draw(mm);
+    }
+    range.addEventListener("input", update);
+    update();
+  })();
+
+  /* ---------- price ---------- */
+  (function price() {
+    var host = document.getElementById("priceList");
+    PRICES.forEach(function (g) {
+      var wrapEl = el("div", "price-group");
+      var cap = el("div", "price-cap");
+      cap.appendChild(el("h3", null, g.cap));
+      cap.appendChild(el("i"));
+      wrapEl.appendChild(cap);
+      g.rows.forEach(function (r) {
+        var row = el("div", "price-row");
+        row.appendChild(el("div", "t", r[0]));
+        row.appendChild(el("div", "p", r[2]));
+        row.appendChild(el("div", "d", r[1]));
+        wrapEl.appendChild(row);
+      });
+      host.appendChild(wrapEl);
+    });
+  })();
+
+  /* ---------- masters ---------- */
+  (function team() {
+    var host = document.getElementById("masters");
+    MASTERS.forEach(function (m) {
+      var card = el("article", "master");
+      var top = el("div", "master-top");
+      var circ = el("div", "mono-circle", m.i);
+      circ.style.background = m.hex;
+      top.appendChild(circ);
+      var who = el("div");
+      who.appendChild(el("h3", null, m.name));
+      who.appendChild(el("div", "role", m.role));
+      top.appendChild(who);
+      card.appendChild(top);
+      card.appendChild(el("p", null, m.text));
+      var sk = el("div", "skills");
+      m.skills.forEach(function (s) { sk.appendChild(el("span", "skill", s)); });
+      card.appendChild(sk);
+      host.appendChild(card);
+    });
+  })();
+
+  /* ---------- steps ---------- */
+  (function steps() {
+    var host = document.getElementById("steps");
+    STEPS.forEach(function (s) {
+      var d = el("div", "step");
+      d.appendChild(el("div", "step-n", s.n));
+      d.appendChild(el("h3", null, s.h));
+      d.appendChild(el("p", null, s.p));
+      d.appendChild(el("div", "t", s.t));
+      host.appendChild(d);
+    });
+  })();
+
+  /* ---------- booking ---------- */
+  (function book() {
+    var form = document.getElementById("bookForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // form.name — це атрибут форми, а не поле: беремо поля через elements
+      var fName = form.elements.namedItem("name");
+      var fPhone = form.elements.namedItem("phone");
+      var name = fName.value.trim();
+      var phone = fPhone.value.trim();
+      if (!name || !phone) {
+        var miss = !name ? fName : fPhone;
+        miss.style.borderColor = "var(--accent)";
+        miss.focus();
+        return;
+      }
+      var dateVal = form.elements.namedItem("date").value;
+      var day = dateVal
+        ? new Date(dateVal + "T00:00").toLocaleDateString("uk-UA", { day:"numeric", month:"long" })
+        : "як буде зручно";
+
+      var done = el("div", "done");
+      done.appendChild(el("h3", null, "Заявку сформовано"));
+      done.appendChild(el("p", null, name + ", ми передзвонимо на " + phone + " і підтвердимо час."));
+      var dl = document.createElement("dl");
+      [["Послуга", form.elements.namedItem("service").value],
+       ["Майстер", form.elements.namedItem("master").value],
+       ["День", day]].forEach(function (p) {
+        dl.appendChild(el("dt", null, p[0]));
+        dl.appendChild(el("dd", null, p[1]));
+      });
+      done.appendChild(dl);
+      done.appendChild(el("p", "form-note", "Демонстраційний макет — дані залишилися у вашому браузері."));
+      var again = el("button", "btn btn-ghost btn-sm", "Заповнити ще раз");
+      again.type = "button";
+      again.style.justifySelf = "start";
+      again.addEventListener("click", function () {
+        var slot = document.getElementById("bookSlot");
+        slot.replaceChildren(form);
+        form.reset();
+        fName.style.borderColor = "";
+        fPhone.style.borderColor = "";
+      });
+      done.appendChild(again);
+      document.getElementById("bookSlot").replaceChildren(done);
+    });
+  })();
+
+  /* ---------- reveal ---------- */
+  (function reveal() {
+    var items = document.querySelectorAll(".rv");
+    if (!("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(items, function (n) { n.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: .08 });
+    Array.prototype.forEach.call(items, function (n) { io.observe(n); });
+  })();
+})();
+</script>
+</body>
+</html>
