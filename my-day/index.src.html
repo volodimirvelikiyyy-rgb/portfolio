@@ -1,0 +1,884 @@
+<title>MY DAY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+
+<style>
+/* ============================================================
+   MY DAY — сімейна перукарня та колорист
+   ------------------------------------------------------------
+   Оформлення виросло з самого приміщення на фото: дуб-крафт,
+   чорний метал, лампи навколо дзеркала — і палітри пасом на шафі.
+   Смужка з восьми тонів волосся (.tones) розділяє секції: це
+   єдиний «кольоровий» елемент, усе решта — папір і графіт.
+   Акцент фіолетовий: колір тонера, яким колорист прибирає
+   жовтизну. Взято з робочого столу, а не з палітри трендів.
+   Кольори живуть тільки в токенах — бо тем три: світла,
+   системна темна і темна за перемикачем глядача.
+   ============================================================ */
+:root{
+  --paper:#F1EFEA;
+  --surface:#FFFFFF;
+  --surface-2:#E7E4DD;
+  --ink:#17161B;
+  --muted:#5F5B68;
+  --line:#DAD6CE;
+  --line-strong:#BEB9AF;
+  --accent:#5B3FA6;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#EBE4FB;
+  --panel:#1B1920;
+  --panel-ink:#F3F0EB;
+  --panel-muted:#A8A1B3;
+  --panel-line:#33303C;
+  --shadow:0 1px 2px rgba(23,22,27,.05);
+
+  --container:1120px;
+  --gutter:20px;
+  --sec:clamp(56px,8vw,112px);
+  --r:4px;
+}
+@media (min-width:760px){ :root{ --gutter:32px } }
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141319;
+    --surface:#1C1A22;
+    --surface-2:#232029;
+    --ink:#F1EEE9;
+    --muted:#A49EAE;
+    --line:#2E2B36;
+    --line-strong:#453F51;
+    --accent:#B79DF5;
+    --accent-ink:#1A1426;
+    --accent-soft:#282235;
+    --panel:#0F0E13;
+    --panel-ink:#F1EEE9;
+    --panel-muted:#9B94A6;
+    --panel-line:#2A2733;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141319;
+  --surface:#1C1A22;
+  --surface-2:#232029;
+  --ink:#F1EEE9;
+  --muted:#A49EAE;
+  --line:#2E2B36;
+  --line-strong:#453F51;
+  --accent:#B79DF5;
+  --accent-ink:#1A1426;
+  --accent-soft:#282235;
+  --panel:#0F0E13;
+  --panel-ink:#F1EEE9;
+  --panel-muted:#9B94A6;
+  --panel-line:#2A2733;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Manrope","Segoe UI",Arial,sans-serif;
+  font-size:16.5px;line-height:1.65;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:var(--sec)}
+/* шапка липка — інакше перехід за якорем ховає заголовок під нею */
+[id]{scroll-margin-top:96px}
+
+/* ---------- типографіка ---------- */
+h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balance}
+.display{font-weight:700;font-size:clamp(34px,5.6vw,62px);line-height:1.04;letter-spacing:-.022em}
+.h2{font-weight:600;font-size:clamp(25px,3.4vw,40px);line-height:1.12;letter-spacing:-.015em}
+.h3{font-weight:600;font-size:clamp(18px,2vw,22px);line-height:1.25}
+.lead{font-size:clamp(17px,1.5vw,19px);line-height:1.6}
+.muted{color:var(--muted)}
+.nums{font-variant-numeric:tabular-nums}
+.label{
+  font-family:"Manrope",Arial,sans-serif;font-weight:700;font-size:11.5px;
+  line-height:1;letter-spacing:.16em;text-transform:uppercase;
+}
+
+/* ---------- смужка тонів (розділювач секцій) ---------- */
+.tones{display:flex;height:6px;width:100%}
+.tones span{flex:1}
+
+/* ---------- шапка ---------- */
+.bar{position:sticky;top:0;z-index:50;background:var(--paper)}
+.bar-in{
+  max-width:var(--container);margin-inline:auto;padding:14px var(--gutter);
+  display:flex;align-items:center;gap:16px;
+}
+.wordmark{
+  font-family:"Bitter","PT Serif",Georgia,serif;font-weight:700;font-size:20px;
+  letter-spacing:.14em;text-decoration:none;text-transform:uppercase;white-space:nowrap;
+}
+.wordmark small{
+  display:block;font-family:"Manrope",Arial,sans-serif;font-weight:600;font-size:10px;
+  letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-top:3px;
+}
+.bar nav{display:none;gap:26px;margin-inline:auto}
+.bar nav a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--muted);transition:color .2s}
+.bar nav a:hover{color:var(--ink)}
+/* .bar-in .bar-cta, а не просто .bar-cta: інакше пізніший .btn
+   з такою самою вагою повертає display:inline-flex і кнопка
+   лишається у шапці поруч із бургером. */
+.bar-in .bar-cta{margin-left:auto;display:none}
+@media (min-width:960px){
+  .bar nav{display:flex}
+  .bar-in .bar-cta{display:inline-flex;margin-left:0}
+}
+.burger{
+  display:inline-flex;align-items:center;gap:8px;margin-left:auto;cursor:pointer;
+  background:none;border:1px solid var(--line-strong);border-radius:var(--r);padding:9px 13px;
+  font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+}
+@media (min-width:960px){ .burger{display:none} }
+
+/* мобільне меню */
+.menu{position:fixed;inset:0;z-index:80;background:var(--paper);padding:14px var(--gutter);display:none;flex-direction:column}
+.menu[data-open="true"]{display:flex}
+.menu-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.menu nav{display:flex;flex-direction:column;gap:2px;margin-block:auto}
+.menu nav a{
+  font-family:"Bitter","PT Serif",Georgia,serif;font-weight:600;font-size:clamp(26px,7vw,36px);
+  text-decoration:none;padding-block:6px;
+}
+.menu-foot{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:8px}
+
+/* ---------- кнопки ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line-strong);border-radius:var(--r);background:transparent;color:var(--ink);
+  padding:11px 18px;font-weight:700;font-size:13.5px;
+  text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s,color .2s;
+}
+.btn:hover{border-color:var(--ink)}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-solid:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn-lg{padding:14px 24px;font-size:15px}
+.btn-panel{border-color:var(--panel-line);color:var(--panel-ink)}
+.btn-panel:hover{border-color:var(--panel-ink)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(24px,4vw,56px);padding-bottom:var(--sec)}
+.hero-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:end}
+@media (min-width:900px){ .hero-grid{grid-template-columns:1.1fr .9fr} }
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--muted);margin-bottom:18px}
+.eyebrow b{width:24px;height:1px;background:var(--line-strong);display:block}
+.hero h1{margin-bottom:20px}
+.hero .lead{margin-bottom:28px;max-width:46ch;color:var(--muted)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.hero-photo{border-radius:var(--r);overflow:hidden;background:var(--surface-2);aspect-ratio:3/4}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+@media (min-width:900px){ .hero-photo{aspect-ratio:4/5} }
+.facts{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:20px 16px;
+  margin-top:38px;padding-top:24px;border-top:1px solid var(--line);
+}
+@media (min-width:760px){ .facts{grid-template-columns:repeat(4,1fr)} }
+.fact b{display:block;font-family:"Bitter","PT Serif",Georgia,serif;font-weight:600;font-size:19px;line-height:1.2;margin-bottom:5px}
+.fact span{display:block;color:var(--muted);font-size:12.5px;line-height:1.35}
+
+/* ---------- панель акції ---------- */
+.offer{background:var(--panel);color:var(--panel-ink);border:1px solid var(--panel-line);border-radius:var(--r);overflow:hidden}
+.offer-in{padding:clamp(26px,4.5vw,56px)}
+.offer-grid{display:grid;gap:clamp(24px,3.5vw,48px)}
+@media (min-width:900px){ .offer-grid{grid-template-columns:.95fr 1.05fr} }
+.badge{
+  display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--accent-ink);
+  padding:7px 13px;border-radius:100px;font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.offer h2{margin:18px 0 14px}
+.offer-lead{color:var(--panel-muted);font-size:clamp(16px,1.4vw,18px);line-height:1.6;max-width:44ch}
+.offer-price{display:flex;align-items:baseline;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--panel-line)}
+.offer-price b{font-family:"Bitter","PT Serif",Georgia,serif;font-size:clamp(36px,5vw,54px);font-weight:700;line-height:1}
+.offer-price span{color:var(--panel-muted);font-size:13.5px;max-width:22ch;line-height:1.4}
+.terms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.terms li{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--panel-line);font-size:15px}
+.terms li:first-child{border-top:0;padding-top:0}
+.terms li:last-child{padding-bottom:0}
+.terms svg{width:19px;height:19px;margin-top:3px;color:var(--accent)}
+.terms p{color:var(--panel-muted);font-size:14px;margin-top:3px;line-height:1.5}
+.offer-foot{
+  border-top:1px solid var(--panel-line);padding:20px clamp(26px,4.5vw,56px);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;
+}
+.offer-foot p{color:var(--panel-muted);font-size:14px;max-width:54ch}
+
+/* ---------- про салон ---------- */
+.about{display:grid;gap:clamp(24px,4vw,56px);align-items:center}
+@media (min-width:900px){ .about{grid-template-columns:.9fr 1.1fr} }
+.about-photo{border-radius:var(--r);overflow:hidden;background:var(--surface-2);aspect-ratio:4/5}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-text p{color:var(--muted);max-width:58ch}
+.about-text p+p{margin-top:16px}
+.about-list{display:grid;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+@media (min-width:640px){ .about-list{grid-template-columns:1fr 1fr;gap:22px} }
+.about-list b{display:block;font-weight:700;font-size:15px;margin-bottom:3px}
+.about-list span{display:block;color:var(--muted);font-size:14px;line-height:1.5}
+
+/* ---------- напрямки ---------- */
+.sec-head{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:end;justify-content:space-between;margin-bottom:clamp(26px,4vw,44px)}
+.sec-head p{max-width:40ch;color:var(--muted)}
+.cards{display:grid;gap:clamp(16px,2.2vw,24px)}
+@media (min-width:700px){ .cards{grid-template-columns:1fr 1fr} }
+@media (min-width:1020px){ .cards{grid-template-columns:repeat(4,1fr)} }
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);
+}
+.card-photo{aspect-ratio:4/3;overflow:hidden;background:var(--surface-2)}
+.card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .card-photo img{transform:scale(1.04)}
+.card-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-body p{color:var(--muted);font-size:14.5px;line-height:1.55;flex:1}
+.card-price{
+  align-self:flex-start;border:1px solid var(--line-strong);border-radius:100px;
+  padding:5px 12px;font-weight:700;font-size:12.5px;
+}
+.card-note{background:var(--accent-soft);border-color:transparent;box-shadow:none}
+.card-note svg{width:24px;height:24px;color:var(--accent)}
+.card-note a{align-self:flex-start;font-weight:700;font-size:13.5px;text-decoration:none;color:var(--accent);border-bottom:1px solid currentColor;padding-bottom:1px}
+
+/* ---------- прайс ---------- */
+.price-head{display:grid;gap:14px;margin-bottom:clamp(24px,3.5vw,40px)}
+@media (min-width:900px){ .price-head{grid-template-columns:1fr 1fr;align-items:end} }
+.price-head p{color:var(--muted)}
+.price-groups{display:grid;gap:clamp(28px,4vw,44px)}
+.pg-cap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.pg-rows{display:flex;flex-direction:column}
+.prow{
+  display:grid;grid-template-columns:1fr auto;gap:2px 16px;
+  padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline;
+}
+@media (min-width:640px){ .prow{grid-template-columns:1fr 96px 112px} }
+.prow .pname{font-weight:500}
+.prow .pdur{color:var(--muted);font-size:13.5px;grid-column:1}
+@media (min-width:640px){ .prow .pdur{grid-column:auto;text-align:right} }
+.prow .psum{font-weight:700;text-align:right;grid-row:1;grid-column:2}
+@media (min-width:640px){ .prow .psum{grid-row:auto;grid-column:auto} }
+.price-note{
+  margin-top:28px;padding:18px 20px;background:var(--surface);border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:var(--r);color:var(--muted);font-size:14.5px;line-height:1.6;
+}
+.price-note b{color:var(--ink)}
+
+/* ---------- як проходить візит ---------- */
+.steps{display:grid;gap:clamp(20px,3vw,32px)}
+@media (min-width:800px){ .steps{grid-template-columns:repeat(3,1fr)} }
+.step{padding-top:16px;border-top:2px solid var(--ink)}
+.step b{display:block;font-family:"Bitter","PT Serif",Georgia,serif;font-size:13px;letter-spacing:.1em;color:var(--accent);margin-bottom:10px}
+.step h3{margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px}
+
+/* ---------- контакти ---------- */
+.contacts{display:grid;gap:clamp(24px,4vw,48px)}
+@media (min-width:900px){ .contacts{grid-template-columns:1.05fr .95fr} }
+.cblocks{display:grid;gap:22px}
+.cblock{padding-top:20px;border-top:1px solid var(--line)}
+.cblock:first-child{border-top:0;padding-top:0}
+.cblock h3{margin-bottom:6px}
+.cblock p{color:var(--muted);font-size:15px}
+.cblock a.link{text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;font-size:14.5px;font-weight:600}
+.cblock a.link:hover{border-color:var(--accent);color:var(--accent)}
+.hours{display:flex;flex-direction:column;gap:7px;margin-top:8px}
+.hours div{display:flex;justify-content:space-between;gap:16px;font-size:15px;border-bottom:1px dotted var(--line-strong);padding-bottom:6px}
+.hours span:last-child{color:var(--muted)}
+.cbox{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px;
+  box-shadow:var(--shadow);align-self:start;
+}
+.cbox p{color:var(--muted);font-size:15px}
+.cbox-cta{display:flex;flex-wrap:wrap;gap:10px}
+.cbox .btn{align-self:flex-start}
+
+/* ---------- підвал ---------- */
+.foot{border-top:1px solid var(--line);margin-top:var(--sec)}
+.foot-in{
+  max-width:var(--container);margin-inline:auto;padding:36px var(--gutter);
+  display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;
+}
+.foot-nav{display:flex;flex-wrap:wrap;gap:10px 28px;align-content:start}
+.foot-nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.foot-nav a:hover{color:var(--ink)}
+.foot-bottom{border-top:1px solid var(--line)}
+.foot-bottom div{
+  max-width:var(--container);margin-inline:auto;padding:16px var(--gutter);
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;color:var(--muted);font-size:13px;
+}
+.foot-bottom a{text-decoration:none}
+
+/* ---------- поява при скролі ---------- */
+.rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none;transition:none}
+  .dot{animation:none}
+  .card-photo img{transition:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 6.6"></path></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.2V12l3.6 2.1"></path></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2 21 19.6H3z"></path><path d="M12 10v3.6"></path><path d="M12 16.6h.01"></path></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2s6.2 6.4 6.2 10.4a6.2 6.2 0 1 1-12.4 0C5.8 9.6 12 3.2 12 3.2z"></path></symbol>
+</svg>
+
+<!-- ================= Шапка ================= -->
+<header class="bar">
+  <div class="bar-in">
+    <a class="wordmark" href="#top">MY DAY<small>перукарня · колорист</small></a>
+    <nav>
+      <a href="#model">Модель на фарбування</a>
+      <a href="#salon">Про салон</a>
+      <a href="#services">Послуги</a>
+      <a href="#price">Прайс</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <a class="btn btn-solid bar-cta" data-fill="tg-btn" href="#contacts" target="_blank" rel="noopener">Записатися</a>
+    <button class="burger" id="menuOpen" aria-expanded="false" aria-controls="menu">Меню</button>
+  </div>
+  <div class="tones" aria-hidden="true">
+    <span style="background:#14100D"></span><span style="background:#3A2317"></span><span style="background:#6B3A1E"></span><span style="background:#9C5A2C"></span><span style="background:#C08949"></span><span style="background:#DDB577"></span><span style="background:#EBD6AC"></span><span style="background:#5B3FA6"></span>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Навігація">
+  <div class="menu-top">
+    <span class="wordmark">MY DAY<small>перукарня · колорист</small></span>
+    <button class="burger" id="menuClose">Закрити</button>
+  </div>
+  <nav>
+    <a href="#model">Модель на фарбування</a>
+    <a href="#salon">Про салон</a>
+    <a href="#services">Послуги</a>
+    <a href="#price">Прайс</a>
+    <a href="#contacts">Контакти</a>
+  </nav>
+  <div class="menu-foot">
+    <p class="label muted" data-fill="address">—</p>
+    <p class="nums" style="font-weight:700"><a data-fill="phone-link" href="#contacts" style="text-decoration:none">—</a></p>
+  </div>
+</div>
+
+<main id="top">
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow label"><b></b>Сімейна перукарня</span>
+        <h1 class="display">Стрижка і колір для всієї сім’ї — в одному кріслі</h1>
+        <p class="lead">Стрижемо дорослих і дітей, оформлюємо бороду, фарбуємо, робимо завивки та укладки. Повний прайс із часом на кожну послугу — нижче на сторінці, ті самі позиції показує бот під час запису.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid btn-lg" href="#model">Безкоштовне фарбування</a>
+          <a class="btn btn-lg" href="#price">Подивитися прайс</a>
+        </div>
+        <div class="facts">
+          <div class="fact"><b class="nums" data-fill="hours-short">—</b><span>Щодня, робочі години</span></div>
+          <div class="fact"><b data-fill="address-short">—</b><span data-fill="city-short">—</span></div>
+          <div class="fact"><b class="nums" data-fill="count">—</b><span>Позицій у прайсі</span></div>
+          <div class="fact"><b class="nums">0 ₴</b><span>Фарбування для моделі</span></div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="__IMG_HERO__" alt="Робоче місце перукарні: дзеркало з лампами, дубова стільниця й чорні крісла">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Модель на фарбування ================= -->
+  <section class="section" id="model" style="padding-top:0">
+    <div class="container">
+      <div class="offer rise">
+        <div class="offer-in offer-grid">
+          <div>
+            <span class="badge"><i class="dot"></i>Триває набір моделей</span>
+            <h2 class="h2">Фарбування безкоштовно — якщо ви станете моделлю</h2>
+            <p class="offer-lead">Майстер відпрацьовує техніки фарбування, тому бере моделей. За роботу ви не платите нічого — оплачуєте тільки фарбу та витратні матеріали або приносите свої.</p>
+            <div class="offer-price">
+              <b class="nums">0 ₴</b>
+              <span>за роботу майстра. Фарба й витратні — окремо, за фактом витрати</span>
+            </div>
+          </div>
+          <ul class="terms">
+            <li>
+              <svg aria-hidden="true"><use href="#i-check"></use></svg>
+              <div><strong>Робота майстра — 0 ₴</strong>
+                <p>Не «мінус 50%» і не бонус до наступного разу. За саму роботу рахунку немає.</p>
+              </div>
+            </li>
+            <li>
+              <svg aria-hidden="true"><use href="#i-drop"></use></svg>
+              <div><strong>Фарба, окисник, витратні — ваші</strong>
+                <p>Можна принести свої або купити в салоні за собівартістю. Скільки пішло — стільки й порахуємо.</p>
+              </div>
+            </li>
+            <li>
+              <svg aria-hidden="true"><use href="#i-clock"></use></svg>
+              <div><strong>Візит довший за звичайний: 2–4 години</strong>
+                <p>Майстер працює повільніше, ніж на платній послузі, і перевіряє кожен крок. Плануйте вільний час.</p>
+              </div>
+            </li>
+            <li>
+              <svg aria-hidden="true"><use href="#i-check"></use></svg>
+              <div><strong>Результат узгоджуємо заздалегідь</strong>
+                <p>Дивимося стан волосся, робимо тест-пасмо і домовляємося про реальний тон — а не про картинку з інтернету.</p>
+              </div>
+            </li>
+            <li>
+              <svg aria-hidden="true"><use href="#i-alert"></use></svg>
+              <div><strong>На складне освітлення можемо не взяти</strong>
+                <p>Якщо волосся не витримає блонд або змивку, майстер скаже це відразу й запропонує простішу техніку.</p>
+              </div>
+            </li>
+            <li>
+              <svg aria-hidden="true"><use href="#i-alert"></use></svg>
+              <div><strong>Місць мало, і це тимчасово</strong>
+                <p>Набір відкритий, поки майстер відпрацьовує техніки. Коли місця закінчаться — приберемо цей блок із сайту.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="offer-foot">
+          <p>Фото роботи можемо додати в портфоліо — тільки з вашої згоди. Не хочете фото — просто скажіть, це нічого не змінює.</p>
+          <a class="btn btn-panel" data-fill="tg-model" href="#contacts" target="_blank" rel="noopener">Записатися моделлю</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Про салон ================= -->
+  <section class="section" id="salon" style="padding-top:0">
+    <div class="container about">
+      <div class="about-photo rise">
+        <img src="__IMG_HALL__" alt="Зал перукарні: крісло, шафа з фарбами та стелаж із доглядовою косметикою">
+      </div>
+      <div class="about-text rise">
+        <h2 class="h2">Маленький салон, де вас знають в обличчя</h2>
+        <p>MY DAY — це одне робоче місце й один майстер. Тому тут не буває так, що наступного разу вас посадять до іншої людини з іншим почерком, а звична стрижка раптом виходить іншою.</p>
+        <p>Приміщення невелике й домашнє: чекати в черзі нема сенсу — кожного записано на свій час, сітка йде по 30 хвилин. Приводять дітей, приходять чоловіки на стрижку з бородою, жінки — на колір, завивку і догляд.</p>
+        <div class="about-list">
+          <div>
+            <b>Один майстер на всі послуги</b>
+            <span>Стрижки, борода, фарбування, догляд — усе робить одна людина.</span>
+          </div>
+          <div>
+            <b>Той самий прайс, що в боті</b>
+            <span>Сайт і бот показують однакові позиції та ціни — без сюрпризів у кріслі.</span>
+          </div>
+          <div>
+            <b>Ціну кажемо до роботи</b>
+            <span>Якщо волосся складне — рахуємо на місці й озвучуємо суму до початку.</span>
+          </div>
+          <div>
+            <b>Дитяча стрижка спокійно</b>
+            <span>Без черги й гучного залу, тому діти сидять терплячіше.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tones" aria-hidden="true">
+    <span style="background:#14100D"></span><span style="background:#3A2317"></span><span style="background:#6B3A1E"></span><span style="background:#9C5A2C"></span><span style="background:#C08949"></span><span style="background:#DDB577"></span><span style="background:#EBD6AC"></span><span style="background:#5B3FA6"></span>
+  </div>
+
+  <!-- ================= Послуги ================= -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="h2">Що робимо</h2>
+        <p>Стрижки, колір, завивки й догляд — усе в одному кріслі. Точні ціни на кожну позицію — у прайсі нижче, там же час, який займе візит.</p>
+      </div>
+      <div class="cards">
+        <article class="card rise">
+          <div class="card-photo"><img src="__IMG_TOOLS__" alt="Машинки для стрижки й набір насадок на робочому килимку"></div>
+          <div class="card-body">
+            <h3 class="h3">Стрижки</h3>
+            <p>Жіночі на три довжини, чоловічі класичні й модельні, дитячі та оформлення бороди. На кожну роботу закладено повну годину, окрім бороди.</p>
+            <span class="card-price nums" data-range="Стрижки">—</span>
+          </div>
+        </article>
+        <article class="card rise">
+          <div class="card-photo"><img src="__IMG_COLOR__" alt="Шафа з фарбами й окисниками, палітри пасом на стіні"></div>
+          <div class="card-body">
+            <h3 class="h3">Фарбування і колорист</h3>
+            <p>Тон-в-тон, фарбування сивини, мелірування, тонування. Складне волосся майстер оцінює до початку роботи.</p>
+            <span class="card-price nums" data-range="Фарбування">—</span>
+          </div>
+        </article>
+        <article class="card rise">
+          <div class="card-photo"><img src="__IMG_BARBER__" alt="Стільниця з гребінцями, феном і машинкою біля дзеркала"></div>
+          <div class="card-body">
+            <h3 class="h3">Завивки, укладки, догляд</h3>
+            <p>Хімічна завивка та біозавивка — по 2 год 30 хв. Укладка брашингом і миття голови йдуть окремими позиціями.</p>
+            <span class="card-price nums" data-range="Завивки|Укладки|Додаткові послуги">—</span>
+          </div>
+        </article>
+        <article class="card card-note rise">
+          <div class="card-body">
+            <svg aria-hidden="true"><use href="#i-drop"></use></svg>
+            <h3 class="h3">Модель на фарбування</h3>
+            <p>Робота майстра — 0 ₴, ваші тільки фарба й витратні. Поки триває набір.</p>
+            <a href="#model">Умови й деталі</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Прайс ================= -->
+  <section class="section" id="price" style="padding-top:0">
+    <div class="container">
+      <div class="price-head">
+        <h2 class="h2">Послуги та ціни</h2>
+        <p>Повний перелік — той самий, що в боті. Поруч із ціною стоїть час, на який закладено візит.</p>
+      </div>
+      <div class="price-groups" id="priceList"></div>
+      <p class="price-note">
+        <b>Складні роботи.</b> Довге або раніше фарбоване волосся майстер оцінює на місці: ціну називають до початку роботи, а не після неї. Позиції й час тут ті самі, що бот показує під час запису, — сайт і бот беруть їх з однієї бази.
+      </p>
+    </div>
+  </section>
+
+  <div class="tones" aria-hidden="true">
+    <span style="background:#14100D"></span><span style="background:#3A2317"></span><span style="background:#6B3A1E"></span><span style="background:#9C5A2C"></span><span style="background:#C08949"></span><span style="background:#DDB577"></span><span style="background:#EBD6AC"></span><span style="background:#5B3FA6"></span>
+  </div>
+
+  <!-- ================= Як проходить візит ================= -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="h2">Як проходить візит</h2>
+        <p>Порядок однаковий і для звичайної послуги, і для безкоштовного фарбування моделі.</p>
+      </div>
+      <div class="steps">
+        <div class="step rise">
+          <b>КРОК 1</b>
+          <h3 class="h3">Оберіть послугу й вільне вікно</h3>
+          <p>У боті: категорія → послуга → день → час. Сітка йде по 30 хвилин, вікна відкриті на два тижні вперед. Не любите ботів — просто наберіть номер.</p>
+        </div>
+        <div class="step rise">
+          <b>КРОК 2</b>
+          <h3 class="h3">Домовляємось про результат</h3>
+          <p>Для фарбування надішліть фото волосся при денному світлі. Обираємо тон і техніку, за потреби робимо тест-пасмо, і одразу кажемо суму та час.</p>
+        </div>
+        <div class="step rise">
+          <b>КРОК 3</b>
+          <h3 class="h3">Приходьте на свій час</h3>
+          <p>Бот нагадає про візит за дві години. Перенести або скасувати запис можна там само, у розділі «Мої записи», — час віддамо іншому.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Контакти ================= -->
+  <section class="section" id="contacts" style="padding-top:0">
+    <div class="container contacts">
+      <div class="cblocks">
+        <div class="cblock">
+          <h3 class="h3" data-fill="address">—</h3>
+          <p style="margin-bottom:10px">Приймаємо за попереднім записом.</p>
+          <a class="link" data-fill="map" href="#" target="_blank" rel="noopener">Відкрити на карті</a>
+        </div>
+        <div class="cblock">
+          <h3 class="h3 nums"><a data-fill="phone-link" href="#" style="text-decoration:none">—</a></h3>
+          <p>Дзвінки та повідомлення в робочі години.</p>
+        </div>
+        <div class="cblock">
+          <h3 class="h3">Графік</h3>
+          <div class="hours nums" id="hours"></div>
+        </div>
+      </div>
+
+      <div class="cbox">
+        <span class="label muted">Запис цілодобово</span>
+        <h3 class="h2" style="font-size:clamp(22px,2.6vw,30px)">Вільні вікна видно в боті</h3>
+        <p>Бот показує тільки ті години, які справді вільні, і не поставить двох клієнтів на один час. Якщо на дзвінок не відповіли — майстер у кріслі, передзвонить, як звільниться.</p>
+        <div class="cbox-cta">
+          <a class="btn btn-solid btn-lg" data-fill="tg-btn" href="#" target="_blank" rel="noopener">Записатися в Telegram</a>
+          <a class="btn btn-lg" data-fill="phone-btn" href="#">Подзвонити</a>
+        </div>
+        <p style="font-size:14px">Хочете безкоштовне фарбування моделлю — так і напишіть, розкажемо про вільні місця.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= Підвал ================= -->
+<footer class="foot">
+  <div class="foot-in">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span class="wordmark">MY DAY<small>перукарня · колорист</small></span>
+      <p class="muted" style="font-size:14px;max-width:26ch" data-fill="address">—</p>
+    </div>
+    <nav class="foot-nav">
+      <a href="#model">Модель на фарбування</a>
+      <a href="#salon">Про салон</a>
+      <a href="#services">Послуги</a>
+      <a href="#price">Прайс</a>
+      <a href="#how">Як проходить візит</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+  </div>
+  <div class="tones" aria-hidden="true">
+    <span style="background:#14100D"></span><span style="background:#3A2317"></span><span style="background:#6B3A1E"></span><span style="background:#9C5A2C"></span><span style="background:#C08949"></span><span style="background:#DDB577"></span><span style="background:#EBD6AC"></span><span style="background:#5B3FA6"></span>
+  </div>
+  <div class="foot-bottom">
+    <div>
+      <span>© <span id="year">2026</span> MY DAY</span>
+      <span><a data-fill="phone-link" href="#">—</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     CONFIG — єдине місце з контактами. Замініть п’ять значень,
+     і вони підставляться в шапку, меню, контакти й підвал.
+     Порожній рядок у map робить посилання на карту прихованим.
+     ============================================================ */
+  var CONFIG = {
+    name: "MY DAY",
+    address: "вул. Салютна, 1",
+    city: "м. Київ",
+    phone: "+380980813353",
+    telegram: "https://t.me/perukarlubovbot",   /* порожньо — кнопки Telegram зникнуть */
+    hoursShort: "09:00 — 20:00",
+    hours: [
+      ["Щодня", "09:00 — 20:00"],
+      ["Крок запису", "30 хвилин"],
+      ["Вікна відкриті", "на 14 днів"]
+    ]
+  };
+
+  /* CATALOG:START — узято з бази бота (data/barbershop.db, активні послуги).
+     Категорії й тривалість ті самі, що бот показує під час запису, —
+     інакше сайт і бот називали б різні ціни. */
+  var CATALOG = {
+    services: [
+      {
+        category: "Стрижки",
+        items: [
+          { name: "Жіноча стрижка — 1 довжина", price: 500, duration_min: 60 },
+          { name: "Жіноча стрижка — 2 довжина", price: 600, duration_min: 60 },
+          { name: "Жіноча стрижка — 3 довжина", price: 700, duration_min: 60 },
+          { name: "Чоловіча стрижка — класична", price: 450, duration_min: 60 },
+          { name: "Чоловіча стрижка — модельна", price: 500, duration_min: 60 },
+          { name: "Дитяча стрижка", price: 500, duration_min: 60 },
+          { name: "Оформлення бороди", price: 250, duration_min: 20 }
+        ]
+      },
+      {
+        category: "Фарбування",
+        items: [
+          { name: "Фарбування тон-в-тон", price: 2800, duration_min: 120 },
+          { name: "Фарбування сивини", price: 800, duration_min: 90 },
+          { name: "Мелірування", price: 1500, duration_min: 150 },
+          { name: "Тонування", price: 800, duration_min: 60 }
+        ]
+      },
+      {
+        category: "Завивки",
+        items: [
+          { name: "Хімічна завивка", price: 1500, duration_min: 150 },
+          { name: "Біозавивка", price: 1500, duration_min: 150 }
+        ]
+      },
+      {
+        category: "Укладки",
+        items: [
+          { name: "Укладка брашингом", price: 500, duration_min: 40 }
+        ]
+      },
+      {
+        category: "Додаткові послуги",
+        items: [
+          { name: "Миття голови", price: 100, duration_min: 20 }
+        ]
+      }
+    ]
+  };
+  /* CATALOG:END */
+
+  /* ---------- helpers ---------- */
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (txt !== undefined) n.textContent = txt;
+    return n;
+  }
+  function fill(key, fn) {
+    [].forEach.call(document.querySelectorAll('[data-fill="' + key + '"]'), fn);
+  }
+  // 150 → «2 год 30 хв», 60 → «1 год», 20 → «20 хв»
+  function dur(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    if (!h) return m + " хв";
+    return h + " год" + (m ? " " + m + " хв" : "");
+  }
+  // 1000 → «1 000 ₴» (нерозривний пробіл у тисячах)
+  function price(v, from) {
+    var s = String(Math.round(v));
+    if (s.length > 3) s = s.slice(0, s.length - 3) + " " + s.slice(-3);
+    return (from ? "від " : "") + s + " ₴";
+  }
+  function plural(n, one, few, many) {
+    var d10 = n % 10, d100 = n % 100;
+    if (d10 === 1 && d100 !== 11) return one;
+    if (d10 >= 2 && d10 <= 4 && (d100 < 12 || d100 > 14)) return few;
+    return many;
+  }
+  // «+380681234567» і «0681234567» однаково стають «+380 68 123 45 67»
+  function phoneDigits(raw) {
+    var d = raw.replace(/\D/g, "");
+    if (d.length === 10 && d.charAt(0) === "0") d = "38" + d;
+    return d;
+  }
+  function phoneText(raw) {
+    var m = /^380(\d{2})(\d{3})(\d{2})(\d{2})$/.exec(phoneDigits(raw));
+    return m ? "+380 " + m[1] + " " + m[2] + " " + m[3] + " " + m[4] : raw;
+  }
+
+  /* ---------- контакти ---------- */
+  var addr = CONFIG.city ? CONFIG.city + ", " + CONFIG.address : CONFIG.address;
+  fill("address", function (n) { n.textContent = addr; });
+  fill("address-short", function (n) { n.textContent = CONFIG.address; });
+  fill("city-short", function (n) { n.textContent = CONFIG.city; });
+  fill("hours-short", function (n) { n.textContent = CONFIG.hoursShort; });
+  var telHref = "tel:+" + phoneDigits(CONFIG.phone);
+  fill("phone-link", function (n) {
+    n.textContent = phoneText(CONFIG.phone);
+    n.setAttribute("href", telHref);
+  });
+  fill("phone-btn", function (n) {
+    n.textContent = phoneText(CONFIG.phone);
+    n.setAttribute("href", telHref);
+  });
+  /* Кнопки запису: є посилання на бота — ведуть у бот, немає — лишаються
+     якорем на блок контактів, щоб не було мертвих кнопок. */
+  fill("tg-btn", function (n) { setTelegram(n); });
+  fill("tg-model", function (n) { setTelegram(n); });
+  function setTelegram(n) {
+    if (CONFIG.telegram) { n.setAttribute("href", CONFIG.telegram); return; }
+    n.setAttribute("href", "#contacts");
+    n.removeAttribute("target");
+    n.removeAttribute("rel");
+    if (n.getAttribute("data-fill") === "tg-btn" && n.className.indexOf("btn-lg") !== -1) {
+      n.textContent = phoneText(CONFIG.phone);
+    }
+  }
+  fill("map", function (n) {
+    n.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addr));
+  });
+
+  var hoursHost = document.getElementById("hours");
+  CONFIG.hours.forEach(function (pair) {
+    var row = el("div");
+    row.appendChild(el("span", null, pair[0]));
+    row.appendChild(el("span", null, pair[1]));
+    hoursHost.appendChild(row);
+  });
+
+  /* ---------- прайс ---------- */
+  var host = document.getElementById("priceList");
+  var total = 0;
+
+  CATALOG.services.forEach(function (block) {
+    var group = el("section", "price-group rise");
+    var cap = el("div", "pg-cap");
+    cap.appendChild(el("h3", "h3", block.category));
+    cap.appendChild(el("span", "label muted",
+      block.items.length + " " + plural(block.items.length, "позиція", "позиції", "позицій")));
+    group.appendChild(cap);
+
+    var rows = el("div", "pg-rows");
+    block.items.forEach(function (item) {
+      total++;
+      var row = el("div", "prow");
+      row.appendChild(el("div", "pname", item.name));
+      row.appendChild(el("div", "pdur nums", dur(item.duration_min)));
+      row.appendChild(el("div", "psum nums", price(item.price, item.from)));
+      rows.appendChild(row);
+    });
+    group.appendChild(rows);
+    host.appendChild(group);
+  });
+
+  fill("count", function (n) { n.textContent = total; });
+
+  /* Бейджі на картках напрямків беруться з того самого CATALOG —
+     інакше після правки прайсу картка і таблиця показували б різне. */
+  [].forEach.call(document.querySelectorAll("[data-range]"), function (node) {
+    /* «Завивки|Укладки|Додаткові послуги» — одна картка на кілька
+       категорій прайсу, тому діапазон рахуємо по всіх одразу. */
+    var cats = node.getAttribute("data-range").split("|");
+    var nums = [];
+    CATALOG.services.forEach(function (b) {
+      if (cats.indexOf(b.category) === -1) return;
+      b.items.forEach(function (i) { nums.push(i.price); });
+    });
+    if (!nums.length) { node.textContent = ""; return; }
+    var min = Math.min.apply(null, nums), max = Math.max.apply(null, nums);
+    node.textContent = min === max ? price(min) : price(min) + " — " + price(max);
+  });
+
+  /* ---------- меню ---------- */
+  var menu = document.getElementById("menu");
+  var openBtn = document.getElementById("menuOpen");
+  function setMenu(open) {
+    menu.setAttribute("data-open", open ? "true" : "false");
+    openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.documentElement.style.overflow = open ? "hidden" : "";
+  }
+  openBtn.addEventListener("click", function () { setMenu(true); });
+  document.getElementById("menuClose").addEventListener("click", function () { setMenu(false); });
+  [].forEach.call(menu.querySelectorAll("nav a"), function (a) {
+    a.addEventListener("click", function () { setMenu(false); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setMenu(false);
+  });
+
+  /* ---------- рік у підвалі ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ---------- поява при скролі ---------- */
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var risers = document.querySelectorAll(".rise");
+  if (reduce || !("IntersectionObserver" in window)) {
+    [].forEach.call(risers, function (n) { n.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    [].forEach.call(risers, function (n) { io.observe(n); });
+  }
+})();
+</script>
