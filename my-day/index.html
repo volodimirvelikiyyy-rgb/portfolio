@@ -316,6 +316,8 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
 }
 .cbox p{color:var(--muted);font-size:15px}
 .cbox-cta{display:flex;flex-wrap:wrap;gap:10px}
+[hidden]{display:none !important}   /* .btn має display:inline-flex і сам по собі hidden не слухає */
+.msgr{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px}
 .cbox .btn{align-self:flex-start}
 
 /* ---------- підвал ---------- */
@@ -389,6 +391,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   <div class="menu-foot">
     <p class="label muted" data-fill="address">—</p>
     <p class="nums" style="font-weight:700"><a data-fill="phone-link" href="#contacts" style="text-decoration:none">—</a></p>
+    <p class="label"><a data-fill="tg-link" href="#contacts" target="_blank" rel="noopener" style="text-decoration:none">Telegram</a> · <a data-fill="viber-link" href="#contacts" style="text-decoration:none">Viber</a></p>
   </div>
 </div>
 
@@ -617,6 +620,14 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
           <p>Дзвінки та повідомлення в робочі години.</p>
         </div>
         <div class="cblock">
+          <h3 class="h3">Месенджери</h3>
+          <p>Пишіть, коли зручно — відповідаємо в робочі години.</p>
+          <div class="msgr">
+            <a class="link" data-fill="tg-link" href="#" target="_blank" rel="noopener">Telegram</a>
+            <a class="link" data-fill="viber-link" href="#">Viber</a>
+          </div>
+        </div>
+        <div class="cblock">
           <h3 class="h3">Графік</h3>
           <div class="hours nums" id="hours"></div>
         </div>
@@ -628,6 +639,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         <p>Бот показує тільки ті години, які справді вільні, і не поставить двох клієнтів на один час. Якщо на дзвінок не відповіли — майстер у кріслі, передзвонить, як звільниться.</p>
         <div class="cbox-cta">
           <a class="btn btn-solid btn-lg" data-fill="tg-btn" href="#" target="_blank" rel="noopener">Записатися в Telegram</a>
+          <a class="btn btn-lg" data-fill="viber-btn" href="#">Написати у Viber</a>
           <a class="btn btn-lg" data-fill="phone-btn" href="#">Подзвонити</a>
         </div>
         <p style="font-size:14px">Хочете безкоштовне фарбування моделлю — так і напишіть, розкажемо про вільні місця.</p>
@@ -678,6 +690,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     city: "м. Київ",
     phone: "+380980813353",
     telegram: "https://t.me/perukarlubovbot",   /* порожньо — кнопки Telegram зникнуть */
+    viber: "",                                 /* порожньо — Viber збереться з номера телефону */
     hoursShort: "09:00 — 20:00",
     hours: [
       ["Щодня", "09:00 — 20:00"],
@@ -789,18 +802,18 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     n.textContent = phoneText(CONFIG.phone);
     n.setAttribute("href", telHref);
   });
-  /* Кнопки запису: є посилання на бота — ведуть у бот, немає — лишаються
-     якорем на блок контактів, щоб не було мертвих кнопок. */
-  fill("tg-btn", function (n) { setTelegram(n); });
-  fill("tg-model", function (n) { setTelegram(n); });
-  function setTelegram(n) {
-    if (CONFIG.telegram) { n.setAttribute("href", CONFIG.telegram); return; }
-    n.setAttribute("href", "#contacts");
-    n.removeAttribute("target");
-    n.removeAttribute("rel");
-    if (n.getAttribute("data-fill") === "tg-btn" && n.className.indexOf("btn-lg") !== -1) {
-      n.textContent = phoneText(CONFIG.phone);
-    }
+  /* Кнопки месенджерів. Немає посилання в CONFIG — елемент ховаємо
+     (краще, ніж кнопка, що веде в нікуди). Viber збирається з номера:
+     viber://chat відкриває діалог у застосунку. */
+  var viberHref = CONFIG.viber || "viber://chat?number=%2B" + phoneDigits(CONFIG.phone);
+  fill("tg-btn", function (n) { setLink(n, CONFIG.telegram); });
+  fill("tg-model", function (n) { setLink(n, CONFIG.telegram); });
+  fill("tg-link", function (n) { setLink(n, CONFIG.telegram); });
+  fill("viber-btn", function (n) { setLink(n, viberHref); });
+  fill("viber-link", function (n) { setLink(n, viberHref); });
+  function setLink(n, href) {
+    if (href) { n.setAttribute("href", href); return; }
+    n.hidden = true;
   }
   fill("map", function (n) {
     n.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addr));
