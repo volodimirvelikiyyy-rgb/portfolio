@@ -312,6 +312,11 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
 .cbox-cta{display:flex;flex-wrap:wrap;gap:10px}
 [hidden]{display:none !important}   /* .btn має display:inline-flex і сам по собі hidden не слухає */
 .msgr{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px}
+.btn svg{width:17px;height:17px;flex:none}
+/* Ряд месенджерів під головними кнопками: дрібніший, щоб не сперечався
+   з основною дією, але це кнопки, а не текстові посилання. */
+.msg-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.msg-row .label{color:var(--muted);margin-right:2px}
 .cbox .btn{align-self:flex-start}
 
 /* ---------- підвал ---------- */
@@ -345,6 +350,8 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 6.6"></path></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.2V12l3.6 2.1"></path></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2 21 19.6H3z"></path><path d="M12 10v3.6"></path><path d="M12 16.6h.01"></path></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.6 3.2 2.6 10.3c-.9.3-.9 1.6 0 1.9l4.9 1.7 1.8 5.3c.3.8 1.3 1 1.9.4l2.6-2.6 4.5 3.3c.7.5 1.6.1 1.8-.7l3.3-15.2c.2-.9-.8-1.6-1.8-1.2z"></path><path d="m7.5 13.9 11-8.3-8.2 9.3"></path></symbol>
+  <symbol id="i-viber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2c4.8 0 8.2 3 8.2 7.2s-3.4 7.2-8.2 7.2c-.8 0-1.6-.1-2.3-.3l-4.6 2.2 1-3.3C4.2 14.9 3.8 13 3.8 10.4 3.8 6.2 7.2 3.2 12 3.2z"></path><path d="M9.6 8.2c.4-.1.8.1 1 .5l.5.9c.2.3.1.7-.2.9l-.3.3c.4.8 1 1.4 1.8 1.8l.3-.3c.2-.3.6-.3.9-.2l.9.5c.4.2.6.6.5 1-.2.7-.9 1.1-1.6.9-2-.5-3.6-2.1-4.1-4.1-.2-.7.1-1.4.8-1.6z"></path></symbol>
   <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5c1.8-2.4 3.6-2.4 5.4 0s3.6 2.4 5.4 0 3.6-2.4 5.4 0"></path><path d="M3 15.5c1.8-2.4 3.6-2.4 5.4 0s3.6 2.4 5.4 0 3.6-2.4 5.4 0"></path></symbol>
   <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2s6.2 6.4 6.2 10.4a6.2 6.2 0 1 1-12.4 0C5.8 9.6 12 3.2 12 3.2z"></path></symbol>
 </svg>
@@ -398,6 +405,12 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         <div class="hero-cta">
           <a class="btn btn-solid btn-lg" href="#model">Безкоштовне фарбування</a>
           <a class="btn btn-lg" href="#price">Подивитися прайс</a>
+        </div>
+        <div class="msg-row">
+          <span class="label">Написати:</span>
+          <a class="btn" data-fill="tg-link" href="#contacts" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tg"></use></svg>Telegram</a>
+          <a class="btn" data-fill="viber-link" href="#contacts"><svg aria-hidden="true"><use href="#i-viber"></use></svg>Viber</a>
+          <a class="btn nums" data-fill="phone-btn" href="#contacts">—</a>
         </div>
         <div class="facts">
           <div class="fact"><b class="nums" data-fill="hours-short">—</b><span>Щодня, робочі години</span></div>
@@ -615,8 +628,8 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
           <h3 class="h3">Месенджери</h3>
           <p>На цей самий номер. Пишіть, коли зручно — відповідаємо в робочі години.</p>
           <div class="msgr">
-            <a class="link" data-fill="tg-link" href="#" target="_blank" rel="noopener">Telegram</a>
-            <a class="link" data-fill="viber-link" href="#">Viber</a>
+            <a class="btn" data-fill="tg-link" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tg"></use></svg>Telegram</a>
+            <a class="btn" data-fill="viber-link" href="#"><svg aria-hidden="true"><use href="#i-viber"></use></svg>Viber</a>
           </div>
         </div>
         <div class="cblock">
@@ -631,9 +644,11 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         <p>Бот показує тільки ті години, які справді вільні, і не поставить двох клієнтів на один час. Якщо на дзвінок не відповіли — майстер у кріслі, передзвонить, як звільниться.</p>
         <div class="cbox-cta">
           <a class="btn btn-solid btn-lg" data-fill="bot-btn" href="#" target="_blank" rel="noopener">Записатися в боті</a>
-          <a class="btn btn-lg" data-fill="phone-btn" href="#">Подзвонити</a>
+          <a class="btn btn-lg" data-fill="tg-link" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tg"></use></svg>Telegram</a>
+          <a class="btn btn-lg" data-fill="viber-link" href="#"><svg aria-hidden="true"><use href="#i-viber"></use></svg>Viber</a>
+          <a class="btn btn-lg nums" data-fill="phone-btn" href="#">—</a>
         </div>
-        <p style="font-size:14px">Не любите ботів — пишіть на цей самий номер у <a data-fill="tg-link" href="#" target="_blank" rel="noopener">Telegram</a> або <a data-fill="viber-link" href="#">Viber</a>. Про безкоштовне фарбування моделлю теж просто напишіть.</p>
+        <p style="font-size:14px">Telegram і Viber — на той самий номер, що й дзвінок. Про безкоштовне фарбування моделлю теж просто напишіть.</p>
       </div>
     </div>
   </section>
