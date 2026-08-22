@@ -251,8 +251,12 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   align-self:flex-start;border:1px solid var(--line-strong);border-radius:100px;
   padding:5px 12px;font-weight:700;font-size:12.5px;
 }
+.card-icon svg{width:24px;height:24px;color:var(--accent)}
+/* Картки без фото стоять поруч із фотокартками: тягнемо їх вміст
+   до середини, щоб ряд не виглядав ступінчастим. */
+.card-icon .card-body{justify-content:center}
+.card-icon .card-body p{flex:0 1 auto}
 .card-note{background:var(--accent-soft);border-color:transparent;box-shadow:none}
-.card-note svg{width:24px;height:24px;color:var(--accent)}
 .card-note a{align-self:flex-start;font-weight:700;font-size:13.5px;text-decoration:none;color:var(--accent);border-bottom:1px solid currentColor;padding-bottom:1px}
 
 /* ---------- прайс ---------- */
@@ -339,6 +343,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 6.6"></path></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.2V12l3.6 2.1"></path></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2 21 19.6H3z"></path><path d="M12 10v3.6"></path><path d="M12 16.6h.01"></path></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5c1.8-2.4 3.6-2.4 5.4 0s3.6 2.4 5.4 0 3.6-2.4 5.4 0"></path><path d="M3 15.5c1.8-2.4 3.6-2.4 5.4 0s3.6 2.4 5.4 0 3.6-2.4 5.4 0"></path></symbol>
   <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2s6.2 6.4 6.2 10.4a6.2 6.2 0 1 1-12.4 0C5.8 9.6 12 3.2 12 3.2z"></path></symbol>
 </svg>
 
@@ -399,7 +404,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         </div>
       </div>
       <div class="hero-photo">
-        <img src="__IMG_HERO__" alt="Робоче місце перукарні: дзеркало з лампами, дубова стільниця й чорні крісла">
+        <img src="__IMG_HERO__" alt="Робоче місце перукарні: дзеркало з лампами, дубова стільниця, чорне крісло">
       </div>
     </div>
   </section>
@@ -469,7 +474,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   <section class="section" id="salon" style="padding-top:0">
     <div class="container about">
       <div class="about-photo rise">
-        <img src="__IMG_HALL__" alt="Зал перукарні: крісло, шафа з фарбами та стелаж із доглядовою косметикою">
+        <img src="__IMG_HALL__" alt="Зал перукарні: крісло, шафа з окисниками і стелаж із доглядовою косметикою">
       </div>
       <div class="about-text rise">
         <h2 class="h2">Маленький салон, де вас знають в обличчя</h2>
@@ -510,7 +515,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
       </div>
       <div class="cards">
         <article class="card rise">
-          <div class="card-photo"><img src="__IMG_TOOLS__" alt="Машинки для стрижки й набір насадок на робочому килимку"></div>
+          <div class="card-photo"><img src="__IMG_TOOLS__" alt="Машинки, насадки та інструменти на робочому килимку; за ними — зона очікування й вихід у двір"></div>
           <div class="card-body">
             <h3 class="h3">Стрижки</h3>
             <p>Жіночі на три довжини, чоловічі класичні й модельні, дитячі та оформлення бороди. На кожну роботу закладено повну годину, окрім бороди.</p>
@@ -518,22 +523,22 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
           </div>
         </article>
         <article class="card rise">
-          <div class="card-photo"><img src="__IMG_COLOR__" alt="Шафа з фарбами й окисниками, палітри пасом на стіні"></div>
+          <div class="card-photo"><img src="__IMG_COLOR__" alt="Місце колориста: підсвічені полиці з окисниками й доглядом, палітри пасом над шафою"></div>
           <div class="card-body">
             <h3 class="h3">Фарбування і колорист</h3>
             <p>Тон-в-тон, фарбування сивини, мелірування, тонування. Складне волосся майстер оцінює до початку роботи.</p>
             <span class="card-price nums" data-range="Фарбування">—</span>
           </div>
         </article>
-        <article class="card rise">
-          <div class="card-photo"><img src="__IMG_BARBER__" alt="Стільниця з гребінцями, феном і машинкою біля дзеркала"></div>
+        <article class="card card-icon rise">
           <div class="card-body">
+            <svg aria-hidden="true"><use href="#i-wave"></use></svg>
             <h3 class="h3">Завивки, укладки, догляд</h3>
             <p>Хімічна завивка та біозавивка — по 2 год 30 хв. Укладка брашингом і миття голови йдуть окремими позиціями.</p>
             <span class="card-price nums" data-range="Завивки|Укладки|Додаткові послуги">—</span>
           </div>
         </article>
-        <article class="card card-note rise">
+        <article class="card card-icon card-note rise">
           <div class="card-body">
             <svg aria-hidden="true"><use href="#i-drop"></use></svg>
             <h3 class="h3">Модель на фарбування</h3>

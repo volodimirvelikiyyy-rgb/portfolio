@@ -21,11 +21,10 @@ const src = path.join(dir, "index.src.html");
 const out = path.join(dir, "artifact.html");
 
 const IMAGES = {
-  __IMG_HERO__:   "img/hero.jpg",   // дзеркало з лампами, дубова стільниця
-  __IMG_HALL__:   "img/hall.jpg",   // зал зі стелажем косметики
-  __IMG_BARBER__: "img/barber.jpg", // робоче місце з гребінцями й феном
-  __IMG_COLOR__:  "img/color.jpg",  // шафа з фарбами й окисниками
-  __IMG_TOOLS__:  "img/tools.jpg",  // машинки та насадки
+  __IMG_HERO__:  "img/hero.jpg",  // дзеркало з лампами, дубова стільниця
+  __IMG_HALL__:  "img/hall.jpg",  // зал зі стелажем косметики
+  __IMG_COLOR__: "img/color.jpg", // шафа з фарбами, окисники, палітри
+  __IMG_TOOLS__: "img/tools.jpg", // інструменти на килимку, зона очікування
 };
 
 let html = fs.readFileSync(src, "utf8");
@@ -43,4 +42,4 @@ const left = html.match(/__IMG_[A-Z]+__/g);
 if (left) throw new Error(`лишилися незамінені плейсхолдери: ${[...new Set(left)].join(", ")}`);
 
 fs.writeFileSync(out, html, "utf8");
-console.log(`\nготово: index.html — ${(fs.statSync(out).size / 1024).toFixed(0)} KB`);
+console.log(`\nготово: artifact.html — ${(fs.statSync(out).size / 1024).toFixed(0)} KB`);
