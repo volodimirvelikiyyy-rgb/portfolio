@@ -368,7 +368,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
       <a href="#price">Прайс</a>
       <a href="#contacts">Контакти</a>
     </nav>
-    <a class="btn btn-solid bar-cta" data-fill="tg-btn" href="#contacts" target="_blank" rel="noopener">Записатися</a>
+    <a class="btn btn-solid bar-cta" data-fill="bot-btn" href="#contacts" target="_blank" rel="noopener">Записатися</a>
     <button class="burger" id="menuOpen" aria-expanded="false" aria-controls="menu">Меню</button>
   </div>
   <div class="tones" aria-hidden="true">
@@ -475,7 +475,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         </div>
         <div class="offer-foot">
           <p>Фото роботи можемо додати в портфоліо — тільки з вашої згоди. Не хочете фото — просто скажіть, це нічого не змінює.</p>
-          <a class="btn btn-panel" data-fill="tg-model" href="#contacts" target="_blank" rel="noopener">Записатися моделлю</a>
+          <a class="btn btn-panel" data-fill="tg-model" href="#contacts" target="_blank" rel="noopener">Написати майстру</a>
         </div>
       </div>
     </div>
@@ -621,7 +621,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         </div>
         <div class="cblock">
           <h3 class="h3">Месенджери</h3>
-          <p>Пишіть, коли зручно — відповідаємо в робочі години.</p>
+          <p>На цей самий номер. Пишіть, коли зручно — відповідаємо в робочі години.</p>
           <div class="msgr">
             <a class="link" data-fill="tg-link" href="#" target="_blank" rel="noopener">Telegram</a>
             <a class="link" data-fill="viber-link" href="#">Viber</a>
@@ -638,11 +638,10 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
         <h3 class="h2" style="font-size:clamp(22px,2.6vw,30px)">Вільні вікна видно в боті</h3>
         <p>Бот показує тільки ті години, які справді вільні, і не поставить двох клієнтів на один час. Якщо на дзвінок не відповіли — майстер у кріслі, передзвонить, як звільниться.</p>
         <div class="cbox-cta">
-          <a class="btn btn-solid btn-lg" data-fill="tg-btn" href="#" target="_blank" rel="noopener">Записатися в Telegram</a>
-          <a class="btn btn-lg" data-fill="viber-btn" href="#">Написати у Viber</a>
+          <a class="btn btn-solid btn-lg" data-fill="bot-btn" href="#" target="_blank" rel="noopener">Записатися в боті</a>
           <a class="btn btn-lg" data-fill="phone-btn" href="#">Подзвонити</a>
         </div>
-        <p style="font-size:14px">Хочете безкоштовне фарбування моделлю — так і напишіть, розкажемо про вільні місця.</p>
+        <p style="font-size:14px">Не любите ботів — пишіть на цей самий номер у <a data-fill="tg-link" href="#" target="_blank" rel="noopener">Telegram</a> або <a data-fill="viber-link" href="#">Viber</a>. Про безкоштовне фарбування моделлю теж просто напишіть.</p>
       </div>
     </div>
   </section>
@@ -689,8 +688,9 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     address: "вул. Салютна, 1",
     city: "м. Київ",
     phone: "+380980813353",
-    telegram: "https://t.me/perukarlubovbot",   /* порожньо — кнопки Telegram зникнуть */
-    viber: "",                                 /* порожньо — Viber збереться з номера телефону */
+    bot: "https://t.me/perukarlubovbot",       /* окрема кнопка запису; порожньо — зникає */
+    /* Telegram і Viber окремо вписувати не треба: месенджери
+       відкриваються на той самий номер, що вище в полі phone. */
     hoursShort: "09:00 — 20:00",
     hours: [
       ["Щодня", "09:00 — 20:00"],
@@ -802,14 +802,16 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     n.textContent = phoneText(CONFIG.phone);
     n.setAttribute("href", telHref);
   });
-  /* Кнопки месенджерів. Немає посилання в CONFIG — елемент ховаємо
-     (краще, ніж кнопка, що веде в нікуди). Viber збирається з номера:
-     viber://chat відкриває діалог у застосунку. */
-  var viberHref = CONFIG.viber || "viber://chat?number=%2B" + phoneDigits(CONFIG.phone);
-  fill("tg-btn", function (n) { setLink(n, CONFIG.telegram); });
-  fill("tg-model", function (n) { setLink(n, CONFIG.telegram); });
-  fill("tg-link", function (n) { setLink(n, CONFIG.telegram); });
-  fill("viber-btn", function (n) { setLink(n, viberHref); });
+  /* Месенджери йдуть на той самий номер, що й дзвінок:
+       t.me/+380… відкриває особистий чат за номером,
+       viber://chat — діалог у Viber.
+     Бот — окреме посилання з CONFIG.bot. Порожнє посилання ховає
+     елемент: краще без кнопки, ніж кнопка в нікуди. */
+  var tgHref = "https://t.me/+" + phoneDigits(CONFIG.phone);
+  var viberHref = "viber://chat?number=%2B" + phoneDigits(CONFIG.phone);
+  fill("bot-btn", function (n) { setLink(n, CONFIG.bot); });
+  fill("tg-link", function (n) { setLink(n, tgHref); });
+  fill("tg-model", function (n) { setLink(n, tgHref); });
   fill("viber-link", function (n) { setLink(n, viberHref); });
   function setLink(n, href) {
     if (href) { n.setAttribute("href", href); return; }
