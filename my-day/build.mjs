@@ -21,7 +21,7 @@ const src = path.join(dir, "index.src.html");
 const out = path.join(dir, "artifact.html");
 
 const IMAGES = {
-  __IMG_HERO__:  "img/hero.jpg",  // дзеркало з лампами, дубова стільниця
+  __IMG_HERO__:  "img/hero-v2.jpg", // дзеркало з лампами, дубова стільниця
   __IMG_HALL__:  "img/hall.jpg",  // зал зі стелажем косметики
   __IMG_COLOR__: "img/color.jpg", // шафа з фарбами, окисники, палітри
   __IMG_TOOLS__: "img/tools.jpg", // інструменти на килимку, зона очікування
@@ -33,8 +33,9 @@ for (const [token, rel] of Object.entries(IMAGES)) {
   const file = path.join(dir, rel);
   if (!fs.existsSync(file)) throw new Error(`немає файла ${rel}`);
   const b64 = fs.readFileSync(file).toString("base64");
+  const mime = path.extname(file).toLowerCase() === ".png" ? "image/png" : "image/jpeg";
   if (!html.includes(token)) throw new Error(`у шаблоні немає ${token}`);
-  html = html.split(token).join(`data:image/jpeg;base64,${b64}`);
+  html = html.split(token).join(`data:${mime};base64,${b64}`);
   console.log(`${rel.padEnd(16)} → ${token.padEnd(15)} ${(b64.length / 1024).toFixed(0)} KB base64`);
 }
 
