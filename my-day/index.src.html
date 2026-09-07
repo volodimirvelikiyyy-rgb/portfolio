@@ -276,6 +276,8 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
 @media (min-width:640px){ .prow .pdur{grid-column:auto;text-align:right} }
 .prow .psum{font-weight:700;text-align:right;grid-row:1;grid-column:2}
 @media (min-width:640px){ .prow .psum{grid-row:auto;grid-column:auto} }
+.prow.no-duration .psum{grid-column:2}
+@media (min-width:640px){ .prow.no-duration{grid-template-columns:1fr 112px}.prow.no-duration .psum{grid-column:2} }
 .price-note{
   margin-top:28px;padding:18px 20px;background:var(--surface);border:1px solid var(--line);
   border-left:3px solid var(--accent);border-radius:var(--r);color:var(--muted);font-size:14.5px;line-height:1.6;
@@ -399,7 +401,7 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
       <div>
         <span class="eyebrow label"><b></b>Сімейна перукарня</span>
         <h1 class="display">Стрижка і колір для всієї сім’ї — в одному кріслі</h1>
-        <p class="lead">Стрижемо дорослих і дітей, оформлюємо бороду, фарбуємо, робимо завивки та укладки. Повний прайс із часом на кожну послугу — нижче на сторінці, ті самі позиції показує бот під час запису.</p>
+        <p class="lead">Стрижемо дорослих, оформлюємо бороду, фарбуємо та робимо мелірування. Повний прайс на кожну послугу — нижче на сторінці.</p>
         <div class="hero-cta">
           <a class="btn btn-solid btn-lg" href="#price">Послуги та ціни</a>
           <a class="btn btn-lg" href="#price">Подивитися прайс</a>
@@ -431,23 +433,23 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
       <div class="about-text rise">
         <h2 class="h2">Маленький салон, де вас знають в обличчя</h2>
         <p>MY DAY — це одне робоче місце й один майстер. Тому тут не буває так, що наступного разу вас посадять до іншої людини з іншим почерком, а звична стрижка раптом виходить іншою.</p>
-        <p>Приміщення невелике й домашнє: чекати в черзі нема сенсу — кожного записано на свій час, сітка йде по 30 хвилин. Приводять дітей, приходять чоловіки на стрижку з бородою, жінки — на колір, завивку і догляд.</p>
+        <p>Приміщення невелике й домашнє: чекати в черзі нема сенсу — кожного записано на свій час. Приходять чоловіки на стрижку з бородою, жінки — на стрижку, фарбування та мелірування.</p>
         <div class="about-list">
           <div>
             <b>Один майстер на всі послуги</b>
             <span>Стрижки, борода, фарбування, догляд — усе робить одна людина.</span>
           </div>
           <div>
-            <b>Той самий прайс, що в боті</b>
-            <span>Сайт і бот показують однакові позиції та ціни — без сюрпризів у кріслі.</span>
+            <b>Актуальний прайс на сайті</b>
+            <span>Усі послуги та ціни зібрані в одному переліку — без сюрпризів у кріслі.</span>
           </div>
           <div>
             <b>Ціну кажемо до роботи</b>
             <span>Якщо волосся складне — рахуємо на місці й озвучуємо суму до початку.</span>
           </div>
           <div>
-            <b>Дитяча стрижка спокійно</b>
-            <span>Без черги й гучного залу, тому діти сидять терплячіше.</span>
+            <b>Ціну кажемо до роботи</b>
+            <span>Для послуг із діапазоном остаточну суму називаємо до початку роботи.</span>
           </div>
         </div>
       </div>
@@ -463,31 +465,31 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     <div class="container">
       <div class="sec-head">
         <h2 class="h2">Що робимо</h2>
-        <p>Стрижки, колір, завивки й догляд — усе в одному кріслі. Точні ціни на кожну позицію — у прайсі нижче, там же час, який займе візит.</p>
+        <p>Чоловічі й жіночі стрижки, фарбування та мелірування. Точні ціни на кожну позицію — у прайсі нижче.</p>
       </div>
       <div class="cards">
         <article class="card rise">
           <div class="card-photo"><img src="__IMG_TOOLS__" alt="Машинки, насадки та інструменти на робочому килимку; за ними — зона очікування й вихід у двір"></div>
           <div class="card-body">
-            <h3 class="h3">Стрижки</h3>
-            <p>Жіночі на три довжини, чоловічі класичні й модельні, дитячі та оформлення бороди. На кожну роботу закладено повну годину, окрім бороди.</p>
-            <span class="card-price nums" data-range="Стрижки">—</span>
+            <h3 class="h3">Чоловічі стрижки</h3>
+            <p>Модельна, класична, насадкою або наголо. Окремо можна оформити бороду, помити голову чи додати шейвер.</p>
+            <span class="card-price nums" data-range="Чоловічі стрижки">—</span>
           </div>
         </article>
         <article class="card rise">
           <div class="card-photo"><img src="__IMG_COLOR__" alt="Місце колориста: підсвічені полиці з окисниками й доглядом, палітри пасом над шафою"></div>
           <div class="card-body">
-            <h3 class="h3">Фарбування і колорист</h3>
-            <p>Тон-в-тон, фарбування сивини, мелірування, тонування. Складне волосся майстер оцінює до початку роботи.</p>
-            <span class="card-price nums" data-range="Фарбування">—</span>
+            <h3 class="h3">Жіночі стрижки</h3>
+            <p>Стрижка за довжиною, кінчики та каскад. Точну вартість залежно від довжини волосся називаємо до початку роботи.</p>
+            <span class="card-price nums" data-range="Жіночі стрижки">—</span>
           </div>
         </article>
         <article class="card card-icon rise">
           <div class="card-body">
             <svg aria-hidden="true"><use href="#i-wave"></use></svg>
-            <h3 class="h3">Завивки, укладки, догляд</h3>
-            <p>Хімічна завивка та біозавивка — по 2 год 30 хв. Укладка брашингом і миття голови йдуть окремими позиціями.</p>
-            <span class="card-price nums" data-range="Завивки|Укладки|Додаткові послуги">—</span>
+            <h3 class="h3">Фарбування і мелірування</h3>
+            <p>Фарбування виконуємо фарбою клієнта. Вартість мелірування залежить від довжини волосся.</p>
+            <span class="card-price nums" data-range="Фарбування|Мелірування">—</span>
           </div>
         </article>
       </div>
@@ -499,11 +501,11 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     <div class="container">
       <div class="price-head">
         <h2 class="h2">Послуги та ціни</h2>
-        <p>Повний перелік — той самий, що в боті. Поруч із ціною стоїть час, на який закладено візит.</p>
+        <p>Повний перелік послуг та актуальні ціни. Для послуг із діапазоном сума залежить від довжини волосся.</p>
       </div>
       <div class="price-groups" id="priceList"></div>
       <p class="price-note">
-        <b>Складні роботи.</b> Довге або раніше фарбоване волосся майстер оцінює на місці: ціну називають до початку роботи, а не після неї. Позиції й час тут ті самі, що бот показує під час запису, — сайт і бот беруть їх з однієї бази.
+        <b>Важливо.</b> Для послуг із діапазоном ціна залежить від довжини волосся. Остаточну суму майстер називає до початку роботи.
       </p>
     </div>
   </section>
@@ -633,49 +635,48 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     ]
   };
 
-  /* CATALOG:START — узято з бази бота (data/barbershop.db, активні послуги).
-     Категорії й тривалість ті самі, що бот показує під час запису, —
-     інакше сайт і бот називали б різні ціни. */
+  /* CATALOG:START — актуальний прайс салону. */
   var CATALOG = {
     services: [
       {
-        category: "Стрижки",
+        category: "Чоловічі стрижки",
         items: [
-          { name: "Жіноча стрижка — 1 довжина", price: 500, duration_min: 60 },
-          { name: "Жіноча стрижка — 2 довжина", price: 600, duration_min: 60 },
-          { name: "Жіноча стрижка — 3 довжина", price: 700, duration_min: 60 },
-          { name: "Чоловіча стрижка — класична", price: 450, duration_min: 60 },
-          { name: "Чоловіча стрижка — модельна", price: 500, duration_min: 60 },
-          { name: "Дитяча стрижка", price: 500, duration_min: 60 },
-          { name: "Оформлення бороди", price: 250, duration_min: 20 }
+          { name: "Модельна", price: 450 },
+          { name: "Класична", price: 400 },
+          { name: "Насадка", price: 300 },
+          { name: "Наголо та 1 насадка", price: 250 },
+          { name: "Борода", price: 200, price_to: 300 },
+          { name: "Миття голови", price: 50 },
+          { name: "Шейвер", price: 50, prefix: "+" }
+        ]
+      },
+      {
+        category: "Жіночі стрижки",
+        items: [
+          { name: "Перша довжина", price: 400 },
+          { name: "Друга довжина", price: 450, price_to: 500 },
+          { name: "Третя довжина", price: 500, price_to: 550 },
+          { name: "Кінчики машинкою", price: 350, price_to: 450 },
+          { name: "Кінчики ножицями", price: 350, price_to: 550 },
+          { name: "Каскад на коротке волосся", price: 450, price_to: 550 },
+          { name: "Каскад на довге волосся", price: 550, price_to: 750 },
+          { name: "Миття голови", price: 50 }
         ]
       },
       {
         category: "Фарбування",
         items: [
-          { name: "Фарбування тон-в-тон", price: 2800, duration_min: 120 },
-          { name: "Фарбування сивини", price: 800, duration_min: 90 },
-          { name: "Мелірування", price: 1500, duration_min: 150 },
-          { name: "Тонування", price: 800, duration_min: 60 }
+          { name: "Перша довжина (фарба клієнта)", price: 500 },
+          { name: "Друга довжина (фарба клієнта)", price: 600 },
+          { name: "Третя довжина (фарба клієнта)", price: 700 }
         ]
       },
       {
-        category: "Завивки",
+        category: "Мелірування",
         items: [
-          { name: "Хімічна завивка", price: 1500, duration_min: 150 },
-          { name: "Біозавивка", price: 1500, duration_min: 150 }
-        ]
-      },
-      {
-        category: "Укладки",
-        items: [
-          { name: "Укладка брашингом", price: 500, duration_min: 40 }
-        ]
-      },
-      {
-        category: "Додаткові послуги",
-        items: [
-          { name: "Миття голови", price: 100, duration_min: 20 }
+          { name: "Перша довжина", price: 800 },
+          { name: "Друга довжина", price: 900, price_to: 1000 },
+          { name: "Третя довжина", price: 1200, price_to: 1500 }
         ]
       }
     ]
@@ -703,6 +704,11 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     var s = String(Math.round(v));
     if (s.length > 3) s = s.slice(0, s.length - 3) + " " + s.slice(-3);
     return (from ? "від " : "") + s + " ₴";
+  }
+  function priceText(item) {
+    var value = price(item.price, item.from);
+    if (item.price_to) value += " — " + price(item.price_to);
+    return (item.prefix || "") + value;
   }
   function plural(n, one, few, many) {
     var d10 = n % 10, d100 = n % 100;
@@ -778,10 +784,10 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
     var rows = el("div", "pg-rows");
     block.items.forEach(function (item) {
       total++;
-      var row = el("div", "prow");
+      var row = el("div", "prow" + (item.duration_min ? "" : " no-duration"));
       row.appendChild(el("div", "pname", item.name));
-      row.appendChild(el("div", "pdur nums", dur(item.duration_min)));
-      row.appendChild(el("div", "psum nums", price(item.price, item.from)));
+      if (item.duration_min) row.appendChild(el("div", "pdur nums", dur(item.duration_min)));
+      row.appendChild(el("div", "psum nums", priceText(item)));
       rows.appendChild(row);
     });
     group.appendChild(rows);
@@ -793,13 +799,12 @@ h1,h2,h3{font-family:"Bitter","PT Serif",Georgia,serif;margin:0;text-wrap:balanc
   /* Бейджі на картках напрямків беруться з того самого CATALOG —
      інакше після правки прайсу картка і таблиця показували б різне. */
   [].forEach.call(document.querySelectorAll("[data-range]"), function (node) {
-    /* «Завивки|Укладки|Додаткові послуги» — одна картка на кілька
-       категорій прайсу, тому діапазон рахуємо по всіх одразу. */
+    /* Одна картка може показувати діапазон кількох категорій прайсу. */
     var cats = node.getAttribute("data-range").split("|");
     var nums = [];
     CATALOG.services.forEach(function (b) {
       if (cats.indexOf(b.category) === -1) return;
-      b.items.forEach(function (i) { nums.push(i.price); });
+      b.items.forEach(function (i) { nums.push(i.price); if (i.price_to) nums.push(i.price_to); });
     });
     if (!nums.length) { node.textContent = ""; return; }
     var min = Math.min.apply(null, nums), max = Math.max.apply(null, nums);
